@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home | Portfolio</title>
 
-  <!-- 预加载图片 -->
+  <!-- 预加载（若从 index.html 进入会更快；直接访问也保底预加载） -->
   <link rel="preload" as="image" href="bg.png">
   <link rel="preload" as="image" href="bg1.png">
   <link rel="preload" as="image" href="bg2.png">
@@ -20,7 +20,7 @@
     html, body{ height:100%; margin:0; scroll-behavior:smooth; }
     body{ font-family:'Montserrat',sans-serif; color:#000; }
 
-    /* === 双层固定背景：用 opacity crossfade 实现丝滑切换 === */
+    /* === 双层固定背景：丝滑淡入淡出 === */
     .bg-layer{
       position:fixed; inset:0; background:center center / cover no-repeat;
       z-index:-1; opacity:1; transition:opacity .8s ease-in-out;
@@ -34,7 +34,10 @@
       background:rgba(255,255,255,.25); backdrop-filter:blur(10px);
       display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:10;
     }
-    header h1{ font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:700; letter-spacing:3px; margin:8px 0 4px; color:#000; }
+    header h1{
+      font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:700;
+      letter-spacing:3px; margin:8px 0 4px; color:#000;
+    }
     nav{ margin-top:4px; }
     nav a{
       margin:0 18px; text-decoration:none; color:#000; letter-spacing:1px;
@@ -64,20 +67,38 @@
       z-index:2; white-space:nowrap; transition:opacity .25s ease;
     }
 
-    /* 介绍页内容（info.png黑白） */
+    /* 自我介绍：左右布局 */
     .about-wrap{
       max-width:1100px; width:100%;
       display:grid; grid-template-columns:1fr 1.2fr; gap:40px; align-items:center;
     }
-    .about-photo{ width:100%; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.08); background:#f5f5f5; }
-    .about-photo img{ display:block; width:100%; height:auto; filter:grayscale(100%); }
-    .about-text h2{ margin:0 0 12px; font-size:2rem; letter-spacing:1px; color:#222; }
+    .about-photo{
+      width:100%; border-radius:16px; overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,.08); background:#f5f5f5;
+    }
+    .about-photo img{
+      display:block; width:100%; height:auto;
+      filter:grayscale(100%);
+    }
+    .about-text h2{
+      margin:0 0 12px; font-size:2rem; letter-spacing:1px; color:#222;
+    }
     .about-text h2 .accent{ color:var(--accent); }
-    .about-text p{ line-height:1.8; font-size:1.02rem; color:#333; margin:0 0 10px; }
+    .about-text ul{
+      list-style:none; padding:0; margin:0;
+      line-height:1.8; font-size:1.05rem; color:#333;
+    }
+    .about-text li strong{ color:#000; }
 
     /* 底部点 */
-    .dots{ position:fixed; left:50%; bottom:28px; transform:translateX(-50%); display:flex; gap:14px; z-index:3; transition:opacity .25s ease; }
-    .dot{ width:12px; height:12px; border-radius:50%; background:#fff; border:2px solid var(--accent); transition:transform .15s, background-color .15s, box-shadow .15s; cursor:pointer; }
+    .dots{
+      position:fixed; left:50%; bottom:28px; transform:translateX(-50%);
+      display:flex; gap:14px; z-index:3; transition:opacity .25s ease;
+    }
+    .dot{
+      width:12px; height:12px; border-radius:50%; background:#fff; border:2px solid var(--accent);
+      transition:transform .15s, background-color .15s, box-shadow .15s; cursor:pointer;
+    }
     .dot:hover{ transform:scale(1.4); background:var(--accent); border-color:var(--accent); box-shadow:0 0 10px 0 var(--accent-weak); }
     .dot.active{ background:var(--accent); border-color:var(--accent); }
 
@@ -93,7 +114,7 @@
   </style>
 </head>
 <body>
-  <!-- 双层固定背景：A/B 两层交替淡入淡出 -->
+  <!-- 双层背景：A/B 交替淡入淡出 -->
   <div class="bg-layer" id="bgA" style="background-image:url('bg.png')"></div>
   <div class="bg-layer hidden" id="bgB"></div>
 
@@ -111,7 +132,7 @@
     <div class="center-text" id="heroTitle">PORTFOLIO</div>
   </section>
 
-  <!-- 自我介绍 -->
+  <!-- 自我介绍页 -->
   <section id="about" aria-label="About Me">
     <div class="about-wrap">
       <div class="about-photo">
@@ -119,17 +140,13 @@
       </div>
       <div class="about-text">
         <h2><span class="accent">About</span> Me</h2>
-        <p>
-          I’m Weiyu Zhang, an architecture & interaction designer exploring how spatial logic,
-          human behavior, and computational systems shape experience. My work bridges rural
-          construction (3D-printed concrete), meeting-space social dynamics (MBTI-aware seating),
-          and interactive installations addressing like-chasing and digital attention.
-        </p>
-        <p>
-          Tools I work with include Rhino/Grasshopper, Python, Unity/Vuforia, TouchDesigner, and
-          data-driven visualization pipelines. I value clarity, material honesty, and human-centered
-          systems—aiming for spaces and tools that reduce friction and elevate focus.
-        </p>
+        <ul>
+          <li><strong>Name:</strong> Weiyu Zhang</li>
+          <li><strong>University:</strong> Tongji University</li>
+          <li><strong>College:</strong> CAUP (College of Architecture and Urban Planning)</li>
+          <li><strong>Class:</strong> Digital Intelligence Experimental Class</li>
+          <li><strong>Direction:</strong> Not limited to traditional architecture; I explore integrating AI and other emerging technologies into architectural design, and I’m also passionate about interaction fields, including HCI and service design.</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -142,7 +159,10 @@
   </div>
 
   <script>
-    // ===== 预加载 =====
+    // ========== 预加载控制：若从 index.html 进入则跳过重复预加载 ==========
+    const alreadyPreloaded = sessionStorage.getItem('__preloaded') === '1';
+
+    // ===== 预加载（直接访问 main.html 时启用；从 index.html 进入则跳过） =====
     const preloadList = ['bg.png','bg1.png','bg2.png','info.png'];
     function preloadAll(srcs){
       return Promise.all(srcs.map(src => new Promise((resolve) => {
@@ -153,37 +173,28 @@
       })));
     }
 
-    // ===== 背景 crossfade 逻辑（A/B 层交替）=====
+    // ===== 背景 crossfade（双层） =====
     const bgA = document.getElementById('bgA');
     const bgB = document.getElementById('bgB');
     const bgSources = ['bg.png','bg1.png','bg2.png'];
-    let current = 0;
-    let useAOnTop = true; // 当前顶层是否 A
+    let current = 0, useAOnTop = true;
 
     function crossfadeTo(nextIndex){
       nextIndex = nextIndex % bgSources.length;
       const nextSrc = bgSources[nextIndex];
-
       if (useAOnTop) {
-        // A 在上 → 把 B 换成新图并淡入；A 同时淡出
         bgB.style.backgroundImage = `url('${nextSrc}')`;
         bgB.classList.remove('hidden');
         bgA.classList.add('hidden');
       } else {
-        // B 在上 → 把 A 换成新图并淡入；B 同时淡出
         bgA.style.backgroundImage = `url('${nextSrc}')`;
         bgA.classList.remove('hidden');
         bgB.classList.add('hidden');
       }
       useAOnTop = !useAOnTop;
       current = nextIndex;
-
-      // 更新底部点
       dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
     }
-
-    // 初始底部点
-    const dots = Array.from(document.querySelectorAll('.dot'));
 
     // 自动轮播
     let timer;
@@ -192,14 +203,15 @@
       timer = setInterval(() => crossfadeTo((current + 1) % bgSources.length), 5000);
     }
 
-    // 鼠标悬停/点击手动切换
+    // 底部点交互
+    const dots = Array.from(document.querySelectorAll('.dot'));
     dots.forEach(dot => {
-      const idx = parseInt(dot.dataset.index, 10);
+      const idx = parseInt(dot.dataset.index,10);
       dot.addEventListener('mouseenter', () => crossfadeTo(idx));
       dot.addEventListener('click', () => crossfadeTo(idx));
     });
 
-    // ===== 两页式分页滚动（一次滚轮=一整屏）=====
+    // ===== 两屏分页滚动（一次滚轮=一整屏）=====
     const HEADER_H = 90;
     let isPaging = false;
     function goToTop(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }
@@ -216,7 +228,7 @@
       setTimeout(() => { isPaging = false; }, 600);
     }, { passive: false });
 
-    // 进入 about 时淡出首屏标题与底部点；回到顶部时恢复
+    // 首屏文字淡出/恢复
     const heroTitle = document.getElementById('heroTitle');
     const dotsEl = document.getElementById('dots');
     const about = document.getElementById('about');
@@ -236,9 +248,9 @@
       }
     });
 
-    // ===== 启动 =====
-    preloadAll(preloadList).then(() => {
-      crossfadeTo(0); // 确保状态一致
+    // ===== 启动：若已在 index.html 预热则跳过本页预加载 =====
+    (alreadyPreloaded ? Promise.resolve() : preloadAll(preloadList)).then(() => {
+      crossfadeTo(0);
       startCarousel();
     });
   </script>

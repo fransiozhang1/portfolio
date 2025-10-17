@@ -1,11 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=main.html">
-  <title>Redirecting...</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Loading…</title>
+  <style>
+    :root { --accent:#cc7a00; }
+    html,body{height:100%;margin:0;font-family:system-ui,Arial;}
+    body{display:flex;align-items:center;justify-content:center;background:#fff;}
+    .wrap{width:min(520px,90vw);text-align:center}
+    .logo{font-weight:800;letter-spacing:2px;font-size:22px;margin-bottom:12px}
+    .bar{height:6px;background:#eee;border-radius:999px;overflow:hidden}
+    .fill{height:100%;width:0;background:var(--accent);transition:width .2s ease}
+    .tip{margin:14px 0 0;color:#666;font-size:12px}
+  </style>
 </head>
 <body>
-  <p>Redirecting to main page...</p>
+  <div class="wrap">
+    <div class="logo">WEIYU&nbsp;ZHANG — Portfolio</div>
+    <div class="bar"><div class="fill" id="fill"></div></div>
+    <div class="tip" id="tip">Preparing images…</div>
+  </div>
+
+  <script>
+    // 你主页里会出现的所有图片都放在这里（可继续加）
+    const assets = [
+      'bg.png', 'bg1.png', 'bg2.png',
+      'info.png'
+    ];
+
+    // 注册 Service Worker（可选但强烈推荐）
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(()=>{});
+    }
+
+    // 预加载所有图片（进入内存 + 浏览器缓存）
+    const fill = document.getElementById('fill');
+    const tip  = document.getElementById('tip');
+
+    function preload(srcs){
+      let done = 0;
+      return Promise.all(srcs.map(src => new Promise(resolve => {
+        const img = new Image();
+        img.onload = img.onerror = () => {
+          done++; fill.style.width = ((done/srcs.length)*100) + '%';
+          resolve();
+        };
+        img.src = src + (src.includes('?') ? '&' : '?') + 'v=' + Date.now(); // 防止某些托管环境的旧缓存
+      })));
+    }
+
+    (async () => {
+      try {
+        await preload(assets);
+        tip.textContent = 'Images cached. Entering…';
+        // 给 main.html 一个标记：已经预加载过
+        sessionStorage.setItem('__preloaded', '1');
+      } catch(e) {
+        // 即使失败也继续跳转，避免卡死在加载页
+      } finally {
+        location.href = 'main.html';
+      }
+    })();
+  </script>
 </body>
 </html>
