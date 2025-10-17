@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home | Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap');
+
+    :root {
+      --accent: #cc7a00; /* 偏棕橘色 */
+      --accent-weak: rgba(204, 122, 0, 0.6);
+      --white: #ffffff;
+    }
+
+    /* 全局 */
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: #000;
+      height: 100vh;
+      overflow: hidden;
+      background: url('bg.png') no-repeat center center fixed;
+      background-size: cover;
+      transition: background-image 1.2s ease-in-out;
+      position: relative;
+    }
+
+    /* 顶部栏 */
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 90px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin: 8px 0 4px 0;
+      color: #000;
+    }
+
+    nav {
+      margin-top: 4px;
+    }
+
+    nav a {
+      margin: 0 18px;
+      text-decoration: none;
+      color: #000;
+      letter-spacing: 1px;
+      transition: color 0.3s ease, border-color 0.3s ease;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 3px;
+    }
+
+    /* 悬停时橘色 */
+    nav a:hover {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* 当前页面高亮 */
+    nav a.active {
+      color: var(--accent);
+      font-weight: 700;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* 中央标题 */
+    .center-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 7rem;
+      font-weight: 800;
+      letter-spacing: 15px;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-shadow:
+        -3px -3px 0 var(--white),
+         3px -3px 0 var(--white),
+        -3px  3px 0 var(--white),
+         3px  3px 0 var(--white),
+        -4px  0   0 var(--white),
+         4px  0   0 var(--white),
+         0   -4px 0 var(--white),
+         0    4px 0 var(--white);
+      z-index: 2;
+      white-space: nowrap;
+    }
+
+    /* 底部切换点 */
+    .dots {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 14px;
+      z-index: 3;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid var(--accent);
+      transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+      cursor: pointer;
+    }
+
+    .dot:hover {
+      transform: scale(1.4);
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 10px 0 var(--accent-weak);
+    }
+
+    .dot.active {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.6rem; }
+      .center-text { font-size: 3rem; letter-spacing: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>WEIYU ZHANG</h1>
+    <nav>
+      <a href="#" class="active">HOME</a>
+      <a href="work.html">WORK</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
+  </header>
+
+  <div class="center-text">PORTFOLIO</div>
+
+  <div class="dots">
+    <div class="dot active" data-index="0"></div>
+    <div class="dot" data-index="1"></div>
+    <div class="dot" data-index="2"></div>
+  </div>
+
+  <script>
+    const images = ['bg.png', 'bg1.png', 'bg2.png'];
+    let current = 0;
+    const body = document.body;
+    const dots = Array.from(document.querySelectorAll('.dot'));
+
+    function updateBackground(i) {
+      current = i % images.length;
+      body.style.backgroundImage = `url('${images[current]}')`;
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+    }
+
+    // 自动轮播
+    setInterval(() => updateBackground((current + 1) % images.length), 5000);
+
+    // 鼠标悬停或点击切换
+    dots.forEach(dot => {
+      dot.addEventListener('mouseenter', e => {
+        const idx = parseInt(e.currentTarget.dataset.index);
+        updateBackground(idx);
+      });
+      dot.addEventListener('click', e => {
+        const idx = parseInt(e.currentTarget.dataset.index);
+        updateBackground(idx);
+      });
+    });
+
+    updateBackground(0);
+  </script>
+</body>
+</html>
