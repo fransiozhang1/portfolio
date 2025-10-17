@@ -5,24 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home | Portfolio</title>
 
-  <!-- 预加载三张背景图 -->
+  <!-- 预加载图片 -->
   <link rel="preload" as="image" href="bg.png">
   <link rel="preload" as="image" href="bg1.png">
   <link rel="preload" as="image" href="bg2.png">
+  <link rel="preload" as="image" href="info.png">
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap');
 
-    :root { --accent:#cc7a00; --accent-weak:rgba(204,122,0,.6); --white:#fff; }
+    :root { --accent:#cc7a00; --accent-weak:rgba(204,122,0,.6); --white:#fff; --headerH:90px; }
 
-    body{
-      margin:0; font-family:'Montserrat',sans-serif; color:#000; height:100vh; overflow:hidden;
-      background:url('bg.png') no-repeat center center fixed; background-size:cover;
-      transition: background-image 1.2s ease-in-out; position:relative;
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; margin:0; scroll-behavior:smooth; }
+    body{ font-family:'Montserrat',sans-serif; color:#000; }
+
+    /* === 双层固定背景：用 opacity crossfade 实现丝滑切换 === */
+    .bg-layer{
+      position:fixed; inset:0; background:center center / cover no-repeat;
+      z-index:-1; opacity:1; transition:opacity .8s ease-in-out;
+      will-change:opacity; transform:translateZ(0);
     }
+    .bg-layer.hidden{ opacity:0; }
 
+    /* 顶部栏 */
     header{
-      position:fixed; top:0; left:0; width:100%; height:90px;
+      position:fixed; top:0; left:0; width:100%; height:var(--headerH);
       background:rgba(255,255,255,.25); backdrop-filter:blur(10px);
       display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:10;
     }
@@ -35,6 +43,16 @@
     nav a:hover{ color:var(--accent); border-bottom:2px solid var(--accent); }
     nav a.active{ color:var(--accent); font-weight:700; border-bottom:2px solid var(--accent); }
 
+    /* 两个整屏区块 */
+    .hero{ position:relative; height:100vh; width:100%; }
+    #about{
+      height:100vh; width:100%;
+      display:flex; align-items:center; justify-content:center;
+      padding:calc(var(--headerH) + 30px) 24px 64px;
+      background:rgba(255,255,255,.92);
+    }
+
+    /* 首屏标题 */
     .center-text{
       position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
       font-size:7rem; font-weight:800; letter-spacing:15px; text-transform:uppercase; color:var(--accent);
@@ -43,27 +61,42 @@
         -3px  3px 0 var(--white),  3px  3px 0 var(--white),
         -4px  0   0 var(--white),  4px  0   0 var(--white),
          0   -4px 0 var(--white),   0    4px 0 var(--white);
-      z-index:2; white-space:nowrap;
+      z-index:2; white-space:nowrap; transition:opacity .25s ease;
     }
 
-    .dots{
-      position:absolute; left:50%; bottom:28px; transform:translateX(-50%);
-      display:flex; gap:14px; z-index:3;
+    /* 介绍页内容（info.png黑白） */
+    .about-wrap{
+      max-width:1100px; width:100%;
+      display:grid; grid-template-columns:1fr 1.2fr; gap:40px; align-items:center;
     }
-    .dot{
-      width:12px; height:12px; border-radius:50%; background:#fff; border:2px solid var(--accent);
-      transition:transform .15s ease, background-color .15s ease, box-shadow .15s ease; cursor:pointer;
-    }
+    .about-photo{ width:100%; border-radius:16px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.08); background:#f5f5f5; }
+    .about-photo img{ display:block; width:100%; height:auto; filter:grayscale(100%); }
+    .about-text h2{ margin:0 0 12px; font-size:2rem; letter-spacing:1px; color:#222; }
+    .about-text h2 .accent{ color:var(--accent); }
+    .about-text p{ line-height:1.8; font-size:1.02rem; color:#333; margin:0 0 10px; }
+
+    /* 底部点 */
+    .dots{ position:fixed; left:50%; bottom:28px; transform:translateX(-50%); display:flex; gap:14px; z-index:3; transition:opacity .25s ease; }
+    .dot{ width:12px; height:12px; border-radius:50%; background:#fff; border:2px solid var(--accent); transition:transform .15s, background-color .15s, box-shadow .15s; cursor:pointer; }
     .dot:hover{ transform:scale(1.4); background:var(--accent); border-color:var(--accent); box-shadow:0 0 10px 0 var(--accent-weak); }
     .dot.active{ background:var(--accent); border-color:var(--accent); }
 
-    @media (max-width:768px){
+    .fade-out{ opacity:0; pointer-events:none; }
+
+    @media (max-width: 900px){
+      .about-wrap{ grid-template-columns:1fr; }
+      .center-text{ font-size:3.2rem; letter-spacing:8px; }
+    }
+    @media (max-width: 768px){
       header h1{ font-size:1.6rem; }
-      .center-text{ font-size:3rem; letter-spacing:8px; }
     }
   </style>
 </head>
 <body>
+  <!-- 双层固定背景：A/B 两层交替淡入淡出 -->
+  <div class="bg-layer" id="bgA" style="background-image:url('bg.png')"></div>
+  <div class="bg-layer hidden" id="bgB"></div>
+
   <header>
     <h1>WEIYU ZHANG</h1>
     <nav>
@@ -73,63 +106,141 @@
     </nav>
   </header>
 
-  <div class="center-text">PORTFOLIO</div>
+  <!-- 首屏 -->
+  <section class="hero" id="hero">
+    <div class="center-text" id="heroTitle">PORTFOLIO</div>
+  </section>
 
-  <div class="dots">
+  <!-- 自我介绍 -->
+  <section id="about" aria-label="About Me">
+    <div class="about-wrap">
+      <div class="about-photo">
+        <img src="info.png" alt="Weiyu Zhang portrait" decoding="async" loading="eager">
+      </div>
+      <div class="about-text">
+        <h2><span class="accent">About</span> Me</h2>
+        <p>
+          I’m Weiyu Zhang, an architecture & interaction designer exploring how spatial logic,
+          human behavior, and computational systems shape experience. My work bridges rural
+          construction (3D-printed concrete), meeting-space social dynamics (MBTI-aware seating),
+          and interactive installations addressing like-chasing and digital attention.
+        </p>
+        <p>
+          Tools I work with include Rhino/Grasshopper, Python, Unity/Vuforia, TouchDesigner, and
+          data-driven visualization pipelines. I value clarity, material honesty, and human-centered
+          systems—aiming for spaces and tools that reduce friction and elevate focus.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 背景切换点 -->
+  <div class="dots" id="dots">
     <div class="dot active" data-index="0" title="Background 1"></div>
     <div class="dot" data-index="1" title="Background 2"></div>
     <div class="dot" data-index="2" title="Background 3"></div>
   </div>
 
   <script>
-    const images = ['bg.png','bg1.png','bg2.png'];
-    let current = 0;
-    const body = document.body;
-    const dots = Array.from(document.querySelectorAll('.dot'));
-
-    // 预加载：全部加载完成后再启动自动轮播
+    // ===== 预加载 =====
+    const preloadList = ['bg.png','bg1.png','bg2.png','info.png'];
     function preloadAll(srcs){
       return Promise.all(srcs.map(src => new Promise((resolve) => {
         const img = new Image();
         img.onload = () => resolve(src);
-        img.onerror = () => resolve(src); // 即使失败也不阻塞
+        img.onerror = () => resolve(src);
         img.src = src;
       })));
     }
 
-    function updateBackground(i){
-      current = i % images.length;
-      body.style.backgroundImage = `url('${images[current]}')`;
+    // ===== 背景 crossfade 逻辑（A/B 层交替）=====
+    const bgA = document.getElementById('bgA');
+    const bgB = document.getElementById('bgB');
+    const bgSources = ['bg.png','bg1.png','bg2.png'];
+    let current = 0;
+    let useAOnTop = true; // 当前顶层是否 A
+
+    function crossfadeTo(nextIndex){
+      nextIndex = nextIndex % bgSources.length;
+      const nextSrc = bgSources[nextIndex];
+
+      if (useAOnTop) {
+        // A 在上 → 把 B 换成新图并淡入；A 同时淡出
+        bgB.style.backgroundImage = `url('${nextSrc}')`;
+        bgB.classList.remove('hidden');
+        bgA.classList.add('hidden');
+      } else {
+        // B 在上 → 把 A 换成新图并淡入；B 同时淡出
+        bgA.style.backgroundImage = `url('${nextSrc}')`;
+        bgA.classList.remove('hidden');
+        bgB.classList.add('hidden');
+      }
+      useAOnTop = !useAOnTop;
+      current = nextIndex;
+
+      // 更新底部点
       dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
     }
 
-    // 启动轮播（在全部预加载后）
+    // 初始底部点
+    const dots = Array.from(document.querySelectorAll('.dot'));
+
+    // 自动轮播
+    let timer;
     function startCarousel(){
-      setInterval(() => {
-        updateBackground((current + 1) % images.length);
-      }, 5000);
+      clearInterval(timer);
+      timer = setInterval(() => crossfadeTo((current + 1) % bgSources.length), 5000);
     }
 
-    // 悬停/点击立即切换
+    // 鼠标悬停/点击手动切换
     dots.forEach(dot => {
-      dot.addEventListener('mouseenter', e => {
-        const idx = parseInt(e.currentTarget.dataset.index, 10);
-        updateBackground(idx);
-      });
-      dot.addEventListener('click', e => {
-        const idx = parseInt(e.currentTarget.dataset.index, 10);
-        updateBackground(idx);
-      });
+      const idx = parseInt(dot.dataset.index, 10);
+      dot.addEventListener('mouseenter', () => crossfadeTo(idx));
+      dot.addEventListener('click', () => crossfadeTo(idx));
     });
 
-    // 初始背景已是 bg.png；预加载其余并启动
-    preloadAll(images).then(() => {
-      // 所有图片已进入缓存，切换将是瞬时的
+    // ===== 两页式分页滚动（一次滚轮=一整屏）=====
+    const HEADER_H = 90;
+    let isPaging = false;
+    function goToTop(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    function goToAbout(){
+      const target = document.getElementById('about').offsetTop - HEADER_H;
+      window.scrollTo({ top: target, behavior: 'smooth' });
+    }
+    window.addEventListener('wheel', (e) => {
+      if (isPaging) { e.preventDefault(); return; }
+      const dy = e.deltaY;
+      if (dy === 0) return;
+      isPaging = true; e.preventDefault();
+      if (dy > 0) goToAbout(); else goToTop();
+      setTimeout(() => { isPaging = false; }, 600);
+    }, { passive: false });
+
+    // 进入 about 时淡出首屏标题与底部点；回到顶部时恢复
+    const heroTitle = document.getElementById('heroTitle');
+    const dotsEl = document.getElementById('dots');
+    const about = document.getElementById('about');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting && entry.target.id === 'about'){
+          heroTitle.classList.add('fade-out');
+          dotsEl.classList.add('fade-out');
+        }
+      });
+    }, { threshold: 0.2 });
+    io.observe(about);
+    window.addEventListener('scroll', () => {
+      if (window.scrollY <= 10) {
+        heroTitle.classList.remove('fade-out');
+        dotsEl.classList.remove('fade-out');
+      }
+    });
+
+    // ===== 启动 =====
+    preloadAll(preloadList).then(() => {
+      crossfadeTo(0); // 确保状态一致
       startCarousel();
     });
-
-    // 保底：确保状态正确
-    updateBackground(0);
   </script>
 </body>
 </html>
