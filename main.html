@@ -4,138 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home | Portfolio</title>
+
+  <!-- 预加载三张背景图 -->
+  <link rel="preload" as="image" href="bg.png">
+  <link rel="preload" as="image" href="bg1.png">
+  <link rel="preload" as="image" href="bg2.png">
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap');
 
-    :root {
-      --accent: #cc7a00; /* 偏棕橘色 */
-      --accent-weak: rgba(204, 122, 0, 0.6);
-      --white: #ffffff;
+    :root { --accent:#cc7a00; --accent-weak:rgba(204,122,0,.6); --white:#fff; }
+
+    body{
+      margin:0; font-family:'Montserrat',sans-serif; color:#000; height:100vh; overflow:hidden;
+      background:url('bg.png') no-repeat center center fixed; background-size:cover;
+      transition: background-image 1.2s ease-in-out; position:relative;
     }
 
-    /* 全局 */
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      color: #000;
-      height: 100vh;
-      overflow: hidden;
-      background: url('bg.png') no-repeat center center fixed;
-      background-size: cover;
-      transition: background-image 1.2s ease-in-out;
-      position: relative;
+    header{
+      position:fixed; top:0; left:0; width:100%; height:90px;
+      background:rgba(255,255,255,.25); backdrop-filter:blur(10px);
+      display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:10;
     }
-
-    /* 顶部栏 */
-    header {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 90px;
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(10px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
+    header h1{ font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:700; letter-spacing:3px; margin:8px 0 4px; color:#000; }
+    nav{ margin-top:4px; }
+    nav a{
+      margin:0 18px; text-decoration:none; color:#000; letter-spacing:1px;
+      transition:color .3s ease, border-color .3s ease; border-bottom:2px solid transparent; padding-bottom:3px;
     }
+    nav a:hover{ color:var(--accent); border-bottom:2px solid var(--accent); }
+    nav a.active{ color:var(--accent); font-weight:700; border-bottom:2px solid var(--accent); }
 
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.4rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      margin: 8px 0 4px 0;
-      color: #000;
-    }
-
-    nav {
-      margin-top: 4px;
-    }
-
-    nav a {
-      margin: 0 18px;
-      text-decoration: none;
-      color: #000;
-      letter-spacing: 1px;
-      transition: color 0.3s ease, border-color 0.3s ease;
-      border-bottom: 2px solid transparent;
-      padding-bottom: 3px;
-    }
-
-    /* 悬停时橘色 */
-    nav a:hover {
-      color: var(--accent);
-      border-bottom: 2px solid var(--accent);
-    }
-
-    /* 当前页面高亮 */
-    nav a.active {
-      color: var(--accent);
-      font-weight: 700;
-      border-bottom: 2px solid var(--accent);
-    }
-
-    /* 中央标题 */
-    .center-text {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 7rem;
-      font-weight: 800;
-      letter-spacing: 15px;
-      text-transform: uppercase;
-      color: var(--accent);
+    .center-text{
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      font-size:7rem; font-weight:800; letter-spacing:15px; text-transform:uppercase; color:var(--accent);
       text-shadow:
-        -3px -3px 0 var(--white),
-         3px -3px 0 var(--white),
-        -3px  3px 0 var(--white),
-         3px  3px 0 var(--white),
-        -4px  0   0 var(--white),
-         4px  0   0 var(--white),
-         0   -4px 0 var(--white),
-         0    4px 0 var(--white);
-      z-index: 2;
-      white-space: nowrap;
+        -3px -3px 0 var(--white),  3px -3px 0 var(--white),
+        -3px  3px 0 var(--white),  3px  3px 0 var(--white),
+        -4px  0   0 var(--white),  4px  0   0 var(--white),
+         0   -4px 0 var(--white),   0    4px 0 var(--white);
+      z-index:2; white-space:nowrap;
     }
 
-    /* 底部切换点 */
-    .dots {
-      position: absolute;
-      left: 50%;
-      bottom: 28px;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 14px;
-      z-index: 3;
+    .dots{
+      position:absolute; left:50%; bottom:28px; transform:translateX(-50%);
+      display:flex; gap:14px; z-index:3;
     }
-
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #fff;
-      border: 2px solid var(--accent);
-      transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
-      cursor: pointer;
+    .dot{
+      width:12px; height:12px; border-radius:50%; background:#fff; border:2px solid var(--accent);
+      transition:transform .15s ease, background-color .15s ease, box-shadow .15s ease; cursor:pointer;
     }
+    .dot:hover{ transform:scale(1.4); background:var(--accent); border-color:var(--accent); box-shadow:0 0 10px 0 var(--accent-weak); }
+    .dot.active{ background:var(--accent); border-color:var(--accent); }
 
-    .dot:hover {
-      transform: scale(1.4);
-      background: var(--accent);
-      border-color: var(--accent);
-      box-shadow: 0 0 10px 0 var(--accent-weak);
-    }
-
-    .dot.active {
-      background: var(--accent);
-      border-color: var(--accent);
-    }
-
-    @media (max-width: 768px) {
-      header h1 { font-size: 1.6rem; }
-      .center-text { font-size: 3rem; letter-spacing: 8px; }
+    @media (max-width:768px){
+      header h1{ font-size:1.6rem; }
+      .center-text{ font-size:3rem; letter-spacing:8px; }
     }
   </style>
 </head>
@@ -152,38 +76,59 @@
   <div class="center-text">PORTFOLIO</div>
 
   <div class="dots">
-    <div class="dot active" data-index="0"></div>
-    <div class="dot" data-index="1"></div>
-    <div class="dot" data-index="2"></div>
+    <div class="dot active" data-index="0" title="Background 1"></div>
+    <div class="dot" data-index="1" title="Background 2"></div>
+    <div class="dot" data-index="2" title="Background 3"></div>
   </div>
 
   <script>
-    const images = ['bg.png', 'bg1.png', 'bg2.png'];
+    const images = ['bg.png','bg1.png','bg2.png'];
     let current = 0;
     const body = document.body;
     const dots = Array.from(document.querySelectorAll('.dot'));
 
-    function updateBackground(i) {
+    // 预加载：全部加载完成后再启动自动轮播
+    function preloadAll(srcs){
+      return Promise.all(srcs.map(src => new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(src);
+        img.onerror = () => resolve(src); // 即使失败也不阻塞
+        img.src = src;
+      })));
+    }
+
+    function updateBackground(i){
       current = i % images.length;
       body.style.backgroundImage = `url('${images[current]}')`;
       dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
     }
 
-    // 自动轮播
-    setInterval(() => updateBackground((current + 1) % images.length), 5000);
+    // 启动轮播（在全部预加载后）
+    function startCarousel(){
+      setInterval(() => {
+        updateBackground((current + 1) % images.length);
+      }, 5000);
+    }
 
-    // 鼠标悬停或点击切换
+    // 悬停/点击立即切换
     dots.forEach(dot => {
       dot.addEventListener('mouseenter', e => {
-        const idx = parseInt(e.currentTarget.dataset.index);
+        const idx = parseInt(e.currentTarget.dataset.index, 10);
         updateBackground(idx);
       });
       dot.addEventListener('click', e => {
-        const idx = parseInt(e.currentTarget.dataset.index);
+        const idx = parseInt(e.currentTarget.dataset.index, 10);
         updateBackground(idx);
       });
     });
 
+    // 初始背景已是 bg.png；预加载其余并启动
+    preloadAll(images).then(() => {
+      // 所有图片已进入缓存，切换将是瞬时的
+      startCarousel();
+    });
+
+    // 保底：确保状态正确
     updateBackground(0);
   </script>
 </body>
