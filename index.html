@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品集加载中...</title>
+    
+    <meta http-equiv="refresh" content="0; url=main.html"> 
+    
+    <style>
+        :root {
+            --primary-color: #000;
+            --background-color: #fff;
+            --font-family-main: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family-main);
+            color: var(--primary-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            /* 居中布局 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .loading-message {
+            padding: 20px;
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        /* 简单的加载动画（可选，增加用户体验） */
+        .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin: 0 2px;
+            border-radius: 50%;
+            background-color: #333;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .dot1 { animation-delay: -0.32s; }
+        .dot2 { animation-delay: -0.16s; }
+        .dot3 { animation-delay: 0s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            } 40% {
+                transform: scale(1.0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading-message">
+        <p>正在进入主页... 请稍候</p>
+        <div class="loading-dots">
+            <span class="dot dot1"></span>
+            <span class="dot dot2"></span>
+            <span class="dot dot3"></span>
+        </div>
+    </div>
+
+</body>
+</html>

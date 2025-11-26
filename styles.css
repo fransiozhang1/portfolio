@@ -1,0 +1,178 @@
+:root {
+            --primary-text: #000;
+            --secondary-text: #666; 
+            --background: #fff;
+            --light-grey: #eee;
+            /* 增大作品区的核心宽度，占页面约 60% */
+            --main-width: 900px; 
+            --font-family-main: 'Inter', Arial, sans-serif; /* 使用新字体 */
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family-main); /* 应用新字体 */
+            background: var(--background);
+            color: var(--primary-text);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* ------------------------------------------- */
+        /* --- A. 顶部和左上角固定布局 (解决重叠问题) --- */
+        /* ------------------------------------------- */
+        
+        /* 创建一个固定在顶部的白色遮罩容器 */
+        #header-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            /* 足够的高度来覆盖所有顶部元素 */
+            height: 60px; 
+            background-color: var(--background); /* 白色背景遮罩 */
+            z-index: 15; /* 位于内容之上，低于左上角菜单 */
+        }
+
+        /* 1. 顶部分类导航 */
+        #top-categories {
+            position: fixed;
+            top: 25px; /* 调整位置 */
+            left: 50%;
+            transform: translateX(-50%); 
+            display: flex;
+            gap: 35px; /* 增大间距 */
+            font-size: 0.9em; /* 略微增大 */
+            font-weight: 500;
+            letter-spacing: 1.5px; /* 增大字间距 */
+            z-index: 20; /* 确保在遮罩之上 */
+        }
+
+        .category-item {
+            text-decoration: none;
+            color: var(--secondary-text);
+            transition: color 0.3s;
+        }
+        .category-item:hover, .category-item.active {
+            color: var(--primary-text);
+        }
+        
+        /* 2. 左上角菜单区 (增大尺寸和字体) */
+        #left-menu-container {
+            position: fixed;
+            top: 25px; /* 与分类导航对齐 */
+            left: 25px;
+            z-index: 30; /* 确保位于最顶层 */
+        }
+
+        #menu-toggle {
+            cursor: pointer;
+            height: 30px; /* 增大切换区高度 */
+            overflow: hidden; 
+        }
+
+        #name-logo {
+            color: var(--secondary-text); 
+            font-weight: 600; /* 加粗 */
+            font-size: 1.2em; /* 增大姓名尺寸 */
+            letter-spacing: 2px; /* 增大字间距 */
+            transition: transform 0.3s ease-out; 
+            display: block;
+        }
+
+        #hamburger-icon {
+            position: absolute;
+            top: 0;
+            opacity: 0; 
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            height: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* 汉堡居中 */
+        }
+
+        .bar {
+            width: 25px; /* 增大汉堡图标宽度 */
+            height: 3px; /* 增大汉堡图标粗细 */
+            background-color: var(--primary-text);
+            margin: 3px 0; /* 增大线条间距 */
+        }
+        
+        /* 3. 下拉菜单 */
+        #dropdown-menu {
+            position: absolute;
+            top: 40px; /* 调整位置 */
+            opacity: 0;
+            visibility: hidden;
+            max-height: 0;
+            transition: max-height 0.4s ease-out, opacity 0.3s ease-out; 
+        }
+
+        #dropdown-menu ul {
+            list-style: none;
+            padding-top: 15px;
+        }
+
+        #dropdown-menu li {
+            padding: 8px 0; /* 增大菜单行高 */
+        }
+
+        #dropdown-menu a {
+            text-decoration: none;
+            color: var(--secondary-text);
+            font-size: 1em; /* 增大菜单字体 */
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+        #dropdown-menu a:hover {
+            color: var(--primary-text);
+        }
+        
+        /* ----------------------------------- */
+        /* --- B. 作品网格居中布局 (增大宽度) --- */
+        /* ----------------------------------- */
+        
+        #portfolio-grid {
+            /* 页面居中对齐 */
+            width: var(--main-width); /* 应用新的大宽度 */
+            max-width: 90%;
+            /* 顶部留出足够的空间，避免被固定头部覆盖 */
+            margin: 120px auto 50px auto; 
+        }
+
+        .project-item {
+            /* 更改为横向布局，使文字和图片并排 */
+            display: flex;
+            flex-direction: row; 
+            margin-bottom: 60px;
+            gap: 50px; /* 增大文字和图片之间的间距 */
+        }
+        
+        .project-info {
+            /* 文字信息占据作品区左侧约 1/3 */
+            width: 30%; 
+            flex-shrink: 0; /* 防止缩小时被挤压 */
+        }
+
+        .project-info h4 {
+            font-size: 1.2em; /* 增大项目标题 */
+            font-weight: 700;
+            margin: 0;
+        }
+        .project-info p {
+            font-size: 0.9em;
+            color: var(--secondary-text);
+            margin: 5px 0 0 0;
+        }
+
+        .project-media.placeholder {
+            /* 图片占据作品区右侧约 2/3 */
+            width: 70%; 
+            height: 400px; /* 增加图片占位高度 */
+            background-color: var(--light-grey); 
+            border: none; /* 移除边框，保持极简 */
+        }
