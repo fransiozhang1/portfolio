@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life By The Wall | WEIYU ZHANG</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="project1.css"> 
+</head>
+<body class="simple-fade-mode is-loading">
+
+    <a href="main.html" id="close-button">×</a>
+    
+    <main id="project-layout">
+        <section id="fixed-info-sidebar">
+            <div id="info-panel">
+                <div class="project-title-area">
+                    <h1>Life By The Wall</h1>
+                    <p class="location-year">UIA Competition 2025</p>
+                    <p class="location-year">2025</p>
+                </div>
+                
+                <div class="project-tags">
+                    <p class="tag-label">TYPOLOGY</p>
+                    <p class="tag-value">Community Renewal</p>
+                    
+                    <p class="tag-label">TECHNOLOGY</p>
+                    <p class="tag-value">Parametric Modeling</p>
+                </div>
+                
+                <div id="description-panel">
+                    <p>Responding to the "Margins and Corners" theme, this project revitalizes a forgotten section of Anqing's ancient city wall. Situated within a residential area, the site suffers from low vitality and fading historical memory. Our design transforms this marginal space into a new public core that fosters community engagement and historical dialogue.</p>
+                    <br>
+                    <p>The "city wall stone" serves as the central motif, reinterpreted through contemporary land art, installations, and seating—evoking historical layers without literal reconstruction. Lightweight, flexible interventions are strategically placed to create a multi-functional venue supporting leisure, cultural displays, and community activities.</p>
+                </div>
+                
+                <footer id="detail-footer">
+                    </footer>
+            </div>
+        </section>
+        
+        <section id="gallery-container">
+            <div class="nav-arrow" id="arrow-left">←</div>
+            <div id="gallery-track">
+                
+                <div class="gallery-item">
+                    <img src="1.png" alt="Project Image 1" class="gallery-image">
+                </div>
+                <div class="gallery-item">
+                    <img src="2.png" alt="Project Image 2" class="gallery-image">
+                </div>
+                <div class="gallery-item">
+                    <img src="3.png" alt="Project Image 3" class="gallery-image">
+                </div>
+                <div class="gallery-item">
+                    <img src="4.png" alt="Project Image 4" class="gallery-image">
+                </div>
+                <div class="gallery-item">
+                    <img src="5.png" alt="Project Image 5" class="gallery-image">
+                </div>
+                <div class="gallery-item">
+                    <img src="6.png" alt="Project Image 6" class="gallery-image">
+                </div>
+                <div class="gallery-item">
+                    <img src="7.png" alt="Project Image 7" class="gallery-image">
+                </div>
+                <div class="gallery-item">
+                    <img src="8.png" alt="Project Image 8" class="gallery-image">
+                </div>
+                <div class="gallery-item">
+                    <img src="9.png" alt="Project Image 9" class="gallery-image">
+                </div>
+                <div class="gallery-item">
+                    <img src="10.png" alt="Project Image 10" class="gallery-image">
+                </div>
+                <div class="gallery-item">
+                    <img src="11.png" alt="Project Image 11" class="gallery-image">
+                </div>
+                
+                <div class="gallery-item gallery-map">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=30.506362,117.035015&hl=zh-CN&z=15&output=embed" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+            </div>
+            <div class="nav-arrow" id="arrow-right">→</div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const track = document.getElementById('gallery-track');
+            const leftBtn = document.getElementById('arrow-left');
+            const rightBtn = document.getElementById('arrow-right');
+            
+            let currentVelocity = 0; 
+            let isHovering = false; 
+            let direction = 0; 
+            let animationFrameId = null; 
+
+            // 调整后的速度参数
+            const ACCELERATION = 0.5; // 降低加速度，让速度增长更慢
+            const MAX_VELOCITY = 15;  // 降低最大速度，使滚动更慢
+            const FRICTION = 0.92;    
+            const MIN_VELOCITY = 0.1; 
+            const TRANSITION_TIME = 800; 
+
+            // --- 1. 页面加载/退出逻辑 ---
+            setTimeout(() => {
+                body.classList.remove('is-loading');
+            }, 50);
+            
+            const closeBtn = document.getElementById('close-button');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    body.classList.add('is-leaving');
+                    setTimeout(() => {
+                        window.location.href = closeBtn.href;
+                    }, TRANSITION_TIME);
+                });
+            }
+
+            // --- 2. 阻尼滚动核心逻辑 ---
+
+            function startAnimation() {
+                if (!track) return;
+
+                if (animationFrameId !== null) {
+                    cancelAnimationFrame(animationFrameId);
+                }
+
+                function animate() {
+                    if (isHovering) {
+                        currentVelocity += direction * ACCELERATION;
+                        currentVelocity = Math.min(MAX_VELOCITY, Math.max(-MAX_VELOCITY, currentVelocity));
+                    } else {
+                        currentVelocity *= FRICTION;
+
+                        if (Math.abs(currentVelocity) < MIN_VELOCITY) {
+                            currentVelocity = 0;
+                            cancelAnimationFrame(animationFrameId);
+                            animationFrameId = null;
+                            return; 
+                        }
+                    }
+
+                    track.scrollLeft += currentVelocity;
+                    animationFrameId = requestAnimationFrame(animate);
+                }
+
+                animate();
+            }
+
+            function setHover(dir) {
+                isHovering = true;
+                direction = dir;
+                startAnimation();
+            }
+
+            function unsetHover() {
+                isHovering = false;
+            }
+
+            if (track && leftBtn && rightBtn) {
+                leftBtn.addEventListener('mouseenter', () => setHover(-1));
+                leftBtn.addEventListener('mouseleave', unsetHover);
+                rightBtn.addEventListener('mouseenter', () => setHover(1));
+                rightBtn.addEventListener('mouseleave', unsetHover);
+            }
+        });
+    </script>
+</body>
+</html>

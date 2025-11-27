@@ -1,0 +1,163 @@
+:root {
+    --primary-text: #000;
+    --secondary-text: #666; 
+    --background: #fff;
+    --light-grey: #eee;
+    --font-family-main: 'Inter', Arial, sans-serif; 
+    
+    /* 核心布局变量 */
+    --main-width: 900px; 
+    
+    /* 动画变量 */
+    --anim-duration: 0.8s; /* 页面切换动画时长 */
+    --filter-duration: 0.4s; /* 筛选动画时长 */
+    --anim-ease: cubic-bezier(0.4, 0, 0.2, 1); 
+}
+
+/* --- 全局重置 --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family-main); 
+    background: var(--background);
+    color: var(--primary-text);
+    min-height: 100vh;
+    
+    overflow-y: hidden;
+    overflow-x: hidden;
+    position: relative; 
+    
+    opacity: 1;
+    transition: opacity var(--anim-duration) var(--anim-ease);
+}
+
+/* 滚动包装器：JS 将通过 transform 移动这个元素 */
+#scroll-wrapper {
+    min-height: 100vh; 
+    will-change: transform; 
+    transition: transform 0.1s ease-out; 
+    
+    padding-top: 60px; 
+    /* 关键修复：底部填充调整为 7vh */
+    padding-bottom: 7vh; 
+}
+
+
+/* =================================================== */
+/* A. main.html 核心样式 */
+/* =================================================== */
+
+/* 顶部白色遮罩 - FIXED POSITION */
+#header-mask {
+    position: fixed; top: 0; left: 0; width: 100%; height: 60px; 
+    background-color: var(--background); 
+    z-index: 15; 
+    transition: opacity var(--anim-duration) var(--anim-ease);
+}
+
+/* 1. 顶部分类导航 - FIXED POSITION */
+#top-categories {
+    position: fixed; top: 25px; left: 50%; transform: translateX(-50%); 
+    display: flex; gap: 35px; font-size: 0.9em; font-weight: 500; letter-spacing: 1.5px; z-index: 20; 
+    transition: opacity var(--anim-duration) var(--anim-ease);
+}
+.category-item { 
+    text-decoration: none; color: var(--secondary-text); transition: color 0.3s;
+    cursor: pointer;
+}
+.category-item:hover, .category-item.active { 
+    color: var(--primary-text); 
+}
+
+/* 2. 左上角菜单区 - FIXED POSITION */
+#left-menu-container { 
+    position: fixed; top: 25px; left: 25px; z-index: 30; 
+    transition: opacity var(--anim-duration) var(--anim-ease);
+}
+#menu-toggle { cursor: pointer; height: 30px; overflow: hidden; }
+#name-logo { color: var(--secondary-text); font-weight: 600; font-size: 1.2em; letter-spacing: 2px; transition: transform 0.3s ease-out; display: block; }
+#hamburger-icon { position: absolute; top: 0; opacity: 0; transition: opacity 0.3s ease-out, transform 0.3s ease-out; height: 30px; display: flex; flex-direction: column; justify-content: center; }
+.bar { width: 25px; height: 3px; background-color: var(--primary-text); margin: 3px 0; }
+#dropdown-menu { position: absolute; top: 40px; opacity: 0; visibility: hidden; max-height: 0; transition: max-height 0.4s ease-out, opacity 0.3s ease-out; }
+#dropdown-menu ul { list-style: none; padding-top: 15px; }
+#dropdown-menu li { padding: 8px 0; }
+#dropdown-menu a { text-decoration: none; color: var(--secondary-text); font-size: 1em; letter-spacing: 1px; transition: color 0.2s; }
+
+/* 4. 作品网格 (居中) - SCROLLABLE CONTENT */
+#portfolio-grid {
+    width: var(--main-width); 
+    max-width: 90%; 
+    margin: 90px auto 100px auto; 
+    display: flex;
+    flex-direction: column; 
+    transition: opacity var(--anim-duration) var(--anim-ease), transform var(--anim-duration) var(--anim-ease);
+}
+.project-item { 
+    display: flex; flex-direction: row; margin-bottom: 80px; gap: 40px; text-decoration: none; color: inherit; 
+    height: 350px; 
+    transition: opacity var(--filter-duration) var(--anim-ease), 
+                transform var(--filter-duration) var(--anim-ease), 
+                height var(--filter-duration) var(--anim-ease), 
+                margin var(--filter-duration) var(--anim-ease);
+    
+    opacity: 1;
+    transform: scale(1);
+}
+
+.project-item:hover { opacity: 0.85; }
+.project-item:hover .project-info h4 { text-decoration: underline; }
+
+.project-info { 
+    width: 30%; flex-shrink: 0; padding-top: 10px; 
+    transition: opacity var(--anim-duration) var(--anim-ease);
+    opacity: 1;
+}
+
+.project-media {
+    width: 70%; height: 350px; 
+    transition: opacity var(--anim-duration) var(--anim-ease), transform var(--anim-duration) var(--anim-ease);
+    opacity: 1;
+    transform: translateX(0);
+}
+.project-media.placeholder { 
+    background-color: var(--light-grey); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+/* --- Main Page 动画状态 --- */
+
+/* 共同行为：页眉、菜单、文字 原地隐藏 */
+body.anim-mode.is-loading #header-mask,
+body.anim-mode.is-leaving #header-mask,
+body.anim-mode.is-loading #top-categories,
+body.anim-mode.is-leaving #top-categories,
+body.anim-mode.is-loading #left-menu-container,
+body.anim-mode.is-leaving #left-menu-container,
+body.anim-mode.is-loading .project-info,
+body.anim-mode.is-leaving .project-info {
+    opacity: 0;
+}
+
+/* 图片特殊行为：向左收起 / 从左展开 */
+body.anim-mode.is-loading .project-media,
+body.anim-mode.is-leaving .project-media {
+    opacity: 0;
+    transform: translateX(-60px);
+}
+
+/* --- 筛选 (过滤) 时的动画状态 --- */
+.project-item.filtered {
+    opacity: 0;
+    transform: scale(0.8); 
+    height: 0 !important; 
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}

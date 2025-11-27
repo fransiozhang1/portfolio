@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Museum | WEIYU ZHANG</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="project2.css"> 
+</head>
+<body class="simple-fade-mode is-loading">
+
+    <a href="main.html" id="close-button">×</a>
+    
+    <main id="project-layout">
+        <section id="fixed-info-sidebar">
+            <div id="info-panel">
+                <div class="project-title-area">
+                    <h1>Memory Museum</h1>
+                    <p class="location-year">Design Course 2025</p>
+                    <p class="location-year">2025</p>
+                </div>
+                
+                <div class="project-tags">
+                    <p class="tag-label">TYPOLOGY</p>
+                    <p class="tag-value">Cultural Architecture</p>
+                    
+                    <p class="tag-label">TECHNOLOGY</p>
+                    <p class="tag-value">Artificial Intelligence</p>
+
+                    <p class="tag-label">STATUS</p>
+                    <p class="tag-value">Unfinished</p>
+                </div>
+                
+                <div id="description-panel">
+                    <p>This project, developed for the Design Course 2025, explores how architectural form can respond to emotional and historical memory through parametric design tools.</p>
+                    <br>
+                    <p>The museum structure utilizes AI-driven facade patterning to reflect evolving narrative flows. Images are currently placeholders.</p>
+                </div>
+                
+                <footer id="detail-footer">
+                    </footer>
+            </div>
+        </section>
+        
+        <section id="gallery-container">
+            <div class="nav-arrow" id="arrow-left">←</div>
+            <div id="gallery-track">
+                
+                <div class="gallery-item wide-placeholder" style="background-color: var(--light-grey);"></div>
+                <div class="gallery-item wide-placeholder" style="background-color: var(--light-grey);"></div>
+                <div class="gallery-item wide-placeholder" style="background-color: var(--light-grey);"></div>
+                <div class="gallery-item wide-placeholder" style="background-color: var(--light-grey);"></div>
+                <div class="gallery-item wide-placeholder" style="background-color: var(--light-grey);"></div>
+                <div class="gallery-item wide-placeholder" style="background-color: var(--light-grey);"></div>
+                <div class="gallery-item wide-placeholder" style="background-color: var(--light-grey);"></div>
+                <div class="gallery-item wide-placeholder" style="background-color: var(--light-grey);"></div>
+                <div class="gallery-item wide-placeholder" style="background-color: var(--light-grey);"></div>
+                <div class="gallery-item wide-placeholder" style="background-color: var(--light-grey);"></div>
+                <div class="gallery-item wide-placeholder" style="background-color: var(--light-grey);"></div>
+                
+                <div class="gallery-item gallery-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.2505517178873!2d144.963057815317!3d-37.81745237975192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642b58872f2d9%3A0xf0579b29e612dd!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1628500000000!5m2!1sen!2sau" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+            </div>
+            <div class="nav-arrow" id="arrow-right">→</div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const track = document.getElementById('gallery-track');
+            const leftBtn = document.getElementById('arrow-left');
+            const rightBtn = document.getElementById('arrow-right');
+            
+            let currentVelocity = 0; 
+            let isHovering = false; 
+            let direction = 0; 
+            let animationFrameId = null; 
+
+            const ACCELERATION = 0.5; 
+            const MAX_VELOCITY = 15;  
+            const FRICTION = 0.92;    
+            const MIN_VELOCITY = 0.1; 
+            const TRANSITION_TIME = 800; 
+
+            // --- 1. 页面加载/退出逻辑 ---
+            setTimeout(() => {
+                body.classList.remove('is-loading');
+            }, 50);
+            
+            const closeBtn = document.getElementById('close-button');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    body.classList.add('is-leaving');
+                    setTimeout(() => {
+                        window.location.href = closeBtn.href;
+                    }, TRANSITION_TIME);
+                });
+            }
+
+            // --- 2. 阻尼滚动核心逻辑 ---
+
+            function startAnimation() {
+                if (!track) return;
+
+                if (animationFrameId !== null) {
+                    cancelAnimationFrame(animationFrameId);
+                }
+
+                function animate() {
+                    if (isHovering) {
+                        currentVelocity += direction * ACCELERATION;
+                        currentVelocity = Math.min(MAX_VELOCITY, Math.max(-MAX_VELOCITY, currentVelocity));
+                    } else {
+                        currentVelocity *= FRICTION;
+
+                        if (Math.abs(currentVelocity) < MIN_VELOCITY) {
+                            currentVelocity = 0;
+                            cancelAnimationFrame(animationFrameId);
+                            animationFrameId = null;
+                            return; 
+                        }
+                    }
+
+                    track.scrollLeft += currentVelocity;
+                    animationFrameId = requestAnimationFrame(animate);
+                }
+
+                animate();
+            }
+
+            function setHover(dir) {
+                isHovering = true;
+                direction = dir;
+                startAnimation();
+            }
+
+            function unsetHover() {
+                isHovering = false;
+            }
+
+            if (track && leftBtn && rightBtn) {
+                leftBtn.addEventListener('mouseenter', () => setHover(-1));
+                leftBtn.addEventListener('mouseleave', unsetHover);
+                rightBtn.addEventListener('mouseenter', () => setHover(1));
+                rightBtn.addEventListener('mouseleave', unsetHover);
+            }
+        });
+    </script>
+</body>
+</html>

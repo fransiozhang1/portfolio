@@ -1,0 +1,194 @@
+:root {
+    --primary-text: #000;
+    --secondary-text: #666; 
+    --background: #fff;
+    --light-grey: #eee;
+    --font-family-main: 'Inter', Arial, sans-serif; 
+    
+    /* 核心布局变量 */
+    --sidebar-width: 300px; 
+    --main-padding: 30px; 
+    
+    /* 动画变量 */
+    --anim-duration: 0.8s; 
+    --anim-ease: cubic-bezier(0.4, 0, 0.2, 1); 
+}
+
+/* --- 全局重置 --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family-main); 
+    background: var(--background);
+    color: var(--primary-text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    
+    /* 页面基础透明度控制 */
+    opacity: 1;
+    transition: opacity var(--anim-duration) var(--anim-ease);
+}
+
+/* 针对 Project 1 的简单淡入淡出状态 */
+body.simple-fade-mode.is-loading,
+body.simple-fade-mode.is-leaving {
+    opacity: 0;
+}
+
+
+/* =================================================== */
+/* B. project1.html 核心样式 */
+/* =================================================== */
+
+/* 1. 关闭按钮 */
+#close-button {
+    position: fixed;
+    top: var(--main-padding);
+    right: var(--main-padding);
+    font-size: 3.5em; 
+    text-decoration: none;
+    color: var(--primary-text);
+    line-height: 0.8;
+    z-index: 200; 
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+#close-button:hover { opacity: 0.6; }
+
+/* 核心布局容器：Grid 分割左右两部分 */
+#project-layout {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr; 
+    width: 100vw;
+    height: 100vh;
+    padding-top: var(--main-padding);
+    overflow: hidden; 
+}
+
+/* 2. 左侧固定信息面板 */
+#fixed-info-sidebar {
+    position: relative;
+    padding: 0 var(--main-padding) var(--main-padding) var(--main-padding);
+    overflow-y: auto; 
+    height: 100%;
+    z-index: 10;
+    background-color: var(--background);
+}
+#info-panel { padding-top: 10px; height: 100%; display: flex; flex-direction: column; }
+.project-title-area h1 { font-size: 1.8em; font-weight: 700; }
+.location-year { font-size: 0.9em; color: var(--secondary-text); }
+.project-tags { margin-top: 40px; font-size: 0.85em; }
+.tag-label { color: var(--secondary-text); margin-top: 15px; }
+.tag-value { font-weight: 700; }
+#description-panel { margin-top: 30px; font-size: 0.9em; line-height: 1.8; color: var(--secondary-text); }
+#detail-footer { margin-top: auto; padding-bottom: 20px; font-size: 0.7em; color: var(--secondary-text); }
+
+/* 3. 右侧画廊区域 */
+#gallery-container {
+    position: relative; 
+    width: 100%;
+    height: 100%;
+    overflow: hidden; 
+}
+
+/* 实际滚动的轨道 */
+#gallery-track {
+    display: flex; 
+    height: 100%;
+    overflow-x: auto; /* 核心：允许水平滚动 */
+    overflow-y: hidden;
+    padding: 0 80px; 
+    align-items: center; /* 垂直居中 */
+    
+    /* 隐藏滚动条 */
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+#gallery-track::-webkit-scrollbar { display: none; }
+
+/* 画廊中的每个项目（图片或地图） */
+.gallery-item {
+    flex-shrink: 0; 
+    height: 90%;    /* 限制高度，确保图片能完整显示 */
+    max-height: 90vh; /* 避免图片超出视口 */
+    width: auto; /* 关键：允许宽度根据内容比例自适应 */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-grey);
+    margin-right: 20px; /* 图片间的间隔 */
+    padding: 0; /* 移除 padding，让图片紧贴边缘 */
+    text-align: center;
+    overflow: hidden; /* 确保图片不会溢出 */
+}
+
+/* 4. 图片样式 */
+.gallery-image {
+    display: block;
+    height: 100%;
+    width: auto; 
+    object-fit: contain; /* 关键：确保图片完整显示，不被裁剪 */
+}
+
+/* 5. 地图容器样式 */
+.gallery-map {
+    width: 70vw; /* 地图需要明确的宽度 */
+    height: 90%;
+    flex-shrink: 0;
+    margin-right: 0; /* 最后的项目不留间隔 */
+    border: 1px solid var(--light-grey);
+    padding: 0; 
+}
+
+.gallery-map iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* 6. 左右控制箭头 */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.9); 
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; 
+    font-size: 1.5em;
+    color: #333;
+    z-index: 100;
+    user-select: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.nav-arrow:hover {
+    background-color: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+/* 位置调整 */
+#arrow-left { 
+    left: 50px; 
+}
+#arrow-right { 
+    right: 50px; 
+}
+
+/* 7. 文字占位符样式 (简化) */
+.text-placeholder {
+    width: 35vw; 
+    align-items: flex-start;
+    padding: 20px;
+}
