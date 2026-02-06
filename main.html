@@ -55,23 +55,23 @@
                     <h4>Memory Museum</h4>
                     <p>Design Course 2025</p>
                 </div>
-                <div class="project-media placeholder"></div>
+                <div class="project-media placeholder" style="background-image: url('pj2.png');"></div>
             </a>
             
-            <a href="#" class="project-item" data-internal data-category="architecture">
+            <a href="project3.html" class="project-item" data-internal data-category="hchx">
                 <div class="project-info">
-                    <h4>Bloomberg Student Center at Johns Hopkins University</h4>
-                    <p>BALTIMORE, UNITED STATES</p>
+                    <h4>SeatSense</h4>
+                    <p>Service Design 2025</p>
                 </div>
-                <div class="project-media placeholder"></div>
+                <div class="project-media placeholder" style="background-image: url('12.png');"></div>
             </a>
             
-            <a href="#" class="project-item" data-internal data-category="hchx">
+            <a href="project4.html" class="project-item" data-internal data-category="architecture">
                 <div class="project-info">
-                    <h4>Digital Twin Interactive Model</h4>
-                    <p>TJU CAUP Research</p>
+                    <h4>Glass House</h4>
+                    <p>Masterpiece Redesign 2025.3</p>
                 </div>
-                <div class="project-media placeholder"></div>
+                <div class="project-media placeholder" style="background-image: url('pj4.png');"></div>
             </a>
             
         </main>
@@ -108,12 +108,12 @@
 
             animateScroll();
 
-            // --- 2. 页面加载动画 (淡入) ---
+            // --- 2. 页面加载动画 ---
             setTimeout(() => {
                 body.classList.remove('is-loading');
             }, 50);
 
-            // --- 3. 筛选核心逻辑 ---
+            // --- 3. 筛选逻辑 ---
             categoryItems.forEach(item => {
                 item.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -134,25 +134,20 @@
             function filterProjects(filter) {
                 projectItems.forEach(project => {
                     const projectCategory = project.getAttribute('data-category');
-                    project.classList.remove('filtered');
                     if (filter && projectCategory !== filter) {
-                        setTimeout(() => {
-                            project.classList.add('filtered');
-                        }, 50); 
+                        project.classList.add('filtered');
                     } else {
                         project.classList.remove('filtered');
                     }
                 });
             }
 
-
-            // --- 4. 页面离开动画 (淡出) ---
+            // --- 4. 页面离开动画 ---
             document.querySelectorAll('a[data-internal]').forEach(link => {
                 link.addEventListener('click', (e) => {
                     const targetUrl = link.href;
                     if (targetUrl && !targetUrl.endsWith('#')) {
                         e.preventDefault();
-                        projectItems.forEach(p => p.style.height = '0'); 
                         body.classList.add('is-leaving');
                         setTimeout(() => {
                             window.location.href = targetUrl;
@@ -161,8 +156,7 @@
                 });
             });
 
-
-            // --- 5. 菜单逻辑 (保持不变) ---
+            // --- 5. 菜单逻辑 ---
             const leftMenuContainer = document.getElementById('left-menu-container');
             const menuToggle = document.getElementById('menu-toggle');
             const nameLogo = document.getElementById('name-logo');

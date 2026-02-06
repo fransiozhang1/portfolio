@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeatSense | WEIYU ZHANG</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="project3.css">
+</head>
+<body class="long-scroll-mode is-loading">
+
+    <a href="main.html" id="close-button">×</a>
+
+    <main id="vertical-content">
+        <section class="hero-section">
+            <div class="hero-text">
+                <h1 class="giant-title">SEAT<br>SENSE</h1>
+                <p class="hero-description">
+                    This project addresses uneven seating and social discomfort in meetings by creating a more comfortable and harmonious environment. I designed a mobile app that recommends suitable seats based on personal data, along with a meeting space shaped to feel balanced and welcoming.
+                </p>
+            </div>
+            <div class="hero-media">
+                <img src="12.png" alt="SeatSense Core Image">
+            </div>
+        </section>
+
+        <section class="story-title-section reveal-on-scroll">
+            <h2>I Sat Where I Didn’t Belong</h2>
+        </section>
+
+        <section class="comic-section">
+            <div class="comic-grid">
+                <div class="comic-panel reveal-on-scroll">
+                    <div class="panel-img"><img src="3-0.png" alt="Scene 0"></div>
+                    <p class="panel-caption">1. Another meeting begins…</p>
+                </div>
+                <div class="comic-panel reveal-on-scroll">
+                    <div class="panel-img"><img src="3-1.png" alt="Scene 1"></div>
+                    <p class="panel-caption">2. "Take a seat anywhere!"</p>
+                </div>
+                <div class="comic-panel reveal-on-scroll">
+                    <div class="panel-img"><img src="3-2.png" alt="Scene 2"></div>
+                    <p class="panel-caption">3. "I want a quiet corner…"</p>
+                </div>
+                <div class="comic-panel reveal-on-scroll">
+                    <div class="panel-img"><img src="3-3.png" alt="Scene 3"></div>
+                    <p class="panel-caption">4. "Why am I stuck here?"</p>
+                </div>
+                <div class="comic-panel reveal-on-scroll">
+                    <div class="panel-img"><img src="3-4.png" alt="Scene 4"></div>
+                    <p class="panel-caption">5. Some thrive at the center.</p>
+                </div>
+                <div class="comic-panel reveal-on-scroll">
+                    <div class="panel-img"><img src="3-5.png" alt="Scene 5"></div>
+                    <p class="panel-caption">6. Some fade away.</p>
+                </div>
+                <div class="comic-panel reveal-on-scroll">
+                    <div class="panel-img"><img src="3-6.png" alt="Scene 6"></div>
+                    <p class="panel-caption">7. Awkward silences grow…</p>
+                </div>
+                <div class="comic-panel reveal-on-scroll">
+                    <div class="panel-img"><img src="3-7.png" alt="Scene 7"></div>
+                    <p class="panel-caption">8. "A better order to sit?"</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="definition-section reveal-on-scroll">
+            <div class="definition-box">
+                <div class="definition-titles">
+                    <span class="def-label">DEFINITION OF</span>
+                    <h2 class="def-main-title">
+                        <span class="highlight-purple">FORCED<br>GATHERING</span>
+                    </h2>
+                </div>
+                <div class="definition-text">
+                    <p>
+                        In academic terms, scenarios such as meetings are referred to as Forced Gatherings. 
+                        A Forced Gathering describes situations in which individuals, lacking the freedom of choice, 
+                        are required to enter the same space and participate in a collective activity.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="image-compare-section reveal-on-scroll">
+            <div class="compare-item">
+                <img src="3-8.png" class="base-img" alt="Analysis Base 1">
+                <img src="3-10.png" class="overlay-img" alt="Analysis Overlay 1">
+            </div>
+            <div class="compare-item">
+                <img src="3-9.png" class="base-img" alt="Analysis Base 2">
+                <img src="3-11.png" class="overlay-img" alt="Analysis Overlay 2">
+            </div>
+        </section>
+
+        <section class="research-section reveal-on-scroll">
+            <h2 class="research-title">BACKGROUND RESEARCH</h2>
+
+            <div class="research-box">
+                <p>
+                    To design a seating system that adapts to people’s needs, I studied how personality and social factors shape spatial behavior. This research built the foundation for my experiment.
+                </p>
+            </div>
+
+            <div class="study-toggle">
+                <button class="toggle-btn active" onclick="switchStudy(1)">Study 1</button>
+                <button class="toggle-btn" onclick="switchStudy(2)">Study 2</button>
+            </div>
+
+            <div class="study-content-container">
+                <div id="study1" class="study-pane active">
+                    <h3 class="secondary-title">Study 1 — Personality Types & Space Preference</h3>
+                    
+                    <div class="method-label">METHOD</div>
+                    <div class="study-media">
+                        <img src="3-12.png" alt="Study 1 Methodology">
+                    </div>
+
+                    <div class="method-label">FINDINGS</div>
+                    <div class="findings-flex-container">
+                        <div class="study-table-container">
+                            <table class="analysis-table interactive-table">
+                                <thead>
+                                    <tr>
+                                        <th>MBTIs</th>
+                                        <th>Traits</th>
+                                        <th>Spatial Preference</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-target="ov-E">
+                                        <td>E</td>
+                                        <td>Sociable, Energetic</td>
+                                        <td><span class="highlight-purple">Shared</span>, <span class="highlight-purple">Open</span> Layouts</td>
+                                    </tr>
+                                    <tr data-target="ov-I">
+                                        <td>I</td>
+                                        <td>Reflective, Reserved</td>
+                                        <td><span class="highlight-purple">Private</span>, Independent</td>
+                                    </tr>
+                                    <tr>
+                                        <td>N</td>
+                                        <td>Imaginative, Visionary</td>
+                                        <td>Flexible, Creative</td>
+                                    </tr>
+                                    <tr>
+                                        <td>S</td>
+                                        <td>Practical, Realistic</td>
+                                        <td>Realistic, Practical</td>
+                                    </tr>
+                                    <tr data-target="ov-F">
+                                        <td>F</td>
+                                        <td>Warm, Empathetic</td>
+                                        <td>Cozy, Decorative Styles</td>
+                                    </tr>
+                                    <tr data-target="ov-T">
+                                        <td>T</td>
+                                        <td>Logical, Objective</td>
+                                        <td>Efficient, Minimal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>J</td>
+                                        <td>Organized, Structured</td>
+                                        <td>Fixed, <span class="highlight-purple">Orderly</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>P</td>
+                                        <td>Flexible, Adaptive</td>
+                                        <td><span class="highlight-purple">Open</span>, Experimental</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="study-findings-media interactive-media">
+                            <img src="3-13.png" alt="Base Layer" class="base-layer">
+                            <div class="overlay-container">
+                                <img src="3-14.png" id="ov-default" class="overlay-img default-visible" alt="Default Overlay">
+                                <img src="3-15.png" id="ov-E" class="overlay-img" alt="E Personality">
+                                <img src="3-16.png" id="ov-I" class="overlay-img" alt="I Personality">
+                                <img src="3-17.png" id="ov-F" class="overlay-img" alt="F Personality">
+                                <img src="3-18.png" id="ov-T" class="overlay-img" alt="T Personality">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="method-label">CONCLUSION</div>
+                    <p class="study-conclusion-text">
+                        Assigning extroverts to central or active zones and introverts to peripheral or quieter zones can reduce discomfort and enhance engagement.
+                    </p>
+                </div>
+
+                <div id="study2" class="study-pane">
+                    <h3 class="secondary-title">Study 2 — Social Dynamics & Group Interaction</h3>
+                    <div class="method-label">METHOD</div>
+                    <div class="study-media">
+                        <img src="3-19.png" alt="Study 2 Methodology">
+                    </div>
+                    
+                    <div class="method-label">FINDINGS</div>
+                    <div class="study-table-container study-2-table">
+                        <table class="analysis-table">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="vertical-align: middle;">Sender</th>
+                                    <th colspan="4" style="text-align: center; border-bottom: 1px solid #000000;">Receiver</th>
+                                </tr>
+                                <tr>
+                                    <th>Culturally and<br>academically congruent</th>
+                                    <th>Culturally congruent,<br>academically dissimilar</th>
+                                    <th>Culturally dissimilar,<br>academically congruent</th>
+                                    <th>Culturally and<br>academically dissimilar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Times</td>
+                                    <td>43 (68%)</td>
+                                    <td>10 (16%)</td>
+                                    <td>10 (16%)</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="method-label">EXAMPLE</div>
+                    <p class="study-example-text">
+                        A German Caucasian with a Master’s degree in Architecture, working as an architect.
+                    </p>
+                    <div class="study-media-small">
+                        <img src="3-20.png" alt="Example: User Profile Visualization">
+                    </div>
+
+                    <div class="method-label">CONCLUSION</div>
+                    <p class="study-conclusion-text">
+                        Grouping individuals with potential common ground — such as shared academic background — can facilitate conversation and reduce initial social barriers.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="experiment-design-section reveal-on-scroll">
+            <h2 class="research-title">DESIGNING EXPERIMENT</h2>
+
+            <div class="research-box">
+                <p>
+                    This experiment explored how <span class="highlight-purple">personality traits</span> and <span class="highlight-purple">social backgrounds</span> affect seating preferences in meetings. The goal was to provide insights for designing an adaptive seating system that reduces discomfort and improves efficiency.
+                </p>
+            </div>
+        </section>
+        <section class="hypothesis-section reveal-on-scroll">
+            <h3 class="secondary-title">Hypothesis Before Experiment</h3>
+            <p class="study-conclusion-text tight-text">
+                When a person chooses a seat, he tends to…
+            </p>
+        </section>
+
+        <section class="experiment-columns-section reveal-on-scroll">
+            <div class="dual-column-container">
+                <div class="experiment-column">
+                    <h4 class="column-mini-title">① Choosing an Area</h4>
+                    <div class="column-media">
+                        <img src="3-21.png" alt="Choosing an Area">
+                    </div>
+                </div>
+
+                <div class="experiment-column">
+                    <h4 class="column-mini-title">② Choosing Neighbors in the Area</h4>
+                    <div class="column-media image-shrink">
+                        <img src="3-22.png" alt="Choosing Neighbors">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="participants-section reveal-on-scroll">
+            <div class="participants-container">
+                <h3 class="participants-main-title">32 Participants</h3>
+
+                <div class="profiles-flex-wrapper">
+                    <div class="participant-card">
+                        <div class="card-image-box">
+                            <img src="3-23.png" alt="Respondent 1 Profile">
+                            <p class="respondent-label">Respondent 1</p>
+                        </div>
+                        <div class="card-info-box bg-blue">
+                            <p>
+                                A 28-year-old software engineer from Shanghai, holding a white-collar position with a postgraduate degree. An INTJ personality type, inclined to sit with introverted individuals (I types) from different professions and hometowns.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="participant-card">
+                        <div class="card-image-box">
+                            <img src="3-24.png" alt="Respondent 2 Profile">
+                            <p class="respondent-label">Respondent 2</p>
+                        </div>
+                        <div class="card-info-box bg-orange">
+                            <p>
+                                A 45-year-old doctor from Beijing, holding a senior management position with a doctoral degree. An ENTJ personality type, inclined to sit with people from the same profession and hometown.
+                            </p>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="participants-footer">......</div>
+            </div>
+        </section>
+        <section class="experiment-detail-section reveal-on-scroll">
+            <div class="layered-title-wrapper">
+                <span class="bg-number-index">01</span>
+                <span class="fg-title-text">Choosing an Area</span>
+            </div>
+
+            <div class="sub-label-left simulation-title">Area Preference Simulation</div>
+
+            <div class="step-animation-container" id="area-step-trigger">
+                <img src="3-25.png" alt="Step 0: Base Layout" class="step-base-img">
+                <div class="step-overlay-wrapper">
+                    <img src="3-26.png" class="step-overlay" id="step-1" alt="Step 1">
+                    <img src="3-27.png" class="step-overlay" id="step-2" alt="Step 2">
+                    <img src="3-28.png" class="step-overlay" id="step-3" alt="Step 3">
+                    <img src="3-29.png" class="step-overlay" id="step-4" alt="Step 4">
+                </div>
+            </div>
+        </section>
+
+        <section class="result-section reveal-on-scroll" id="result-trigger">
+                <div class="sub-label-left result-label-header">RESULT</div>
+
+                <div class="bar-wrapper">
+                        <div class="bar-container">
+                                <div class="bar-segment intro-bar" data-target="41">
+                                        <span class="bar-text">
+                                                <span class="count-up" data-value="13">0</span> (41%)
+                                        </span>
+                                </div>
+                                <div class="bar-segment extro-bar" data-target="59">
+                                        <span class="bar-text">
+                                                <span class="count-up" data-value="19">0</span> (59%)
+                                        </span>
+                                </div>
+                        </div>
+                        <div class="bar-labels">
+                                <span class="label-item">Introverted</span>
+                                <span class="label-item">Extroverted</span>
+                        </div>
+                </div>
+
+                <div class="choose-seats-arrow">
+                        <div class="arrow-text-container">
+                                <span class="arrow-text-side">Choose</span>
+                                <div class="arrow-line"></div>
+                                <span class="arrow-text-side">Seats</span>
+                        </div>
+                        <div class="arrow-head"></div>
+                </div>
+
+                <div class="area-distribution-grid">
+                        <div class="area-box bg-lightest">
+                                <div class="ball-container">
+                                        <span class="p-ball intro">2</span>
+                                        <span class="p-ball extro">27</span>
+                                        <span class="p-ball extro">13</span>
+                                        <span class="p-ball extro">13</span>
+                                        <span class="p-ball extro">32</span>
+                                        <span class="p-ball extro">31</span>
+                                        <span class="p-ball extro">26</span>
+                                        <span class="p-ball extro">8</span>
+                                        <span class="p-ball extro">19</span>
+                                </div>
+                                <h5 class="area-name">Central Area</h5>
+                        </div>
+
+                        <div class="area-box bg-light">
+                                <div class="ball-container">
+                                        <span class="p-ball intro">13</span>
+                                        <span class="p-ball intro">18</span>
+                                        <span class="p-ball intro">10</span>
+                                        <span class="p-ball intro">1</span>
+                                        <span class="p-ball extro">5</span>
+                                        <span class="p-ball extro">14</span>
+                                        <span class="p-ball extro">3</span>
+                                </div>
+                                <h5 class="area-name">Active Area</h5>
+                        </div>
+
+                        <div class="area-box bg-medium">
+                                <div class="ball-container">
+                                        <span class="p-ball intro">12</span>
+                                        <span class="p-ball intro">21</span>
+                                        <span class="p-ball extro">16</span>
+                                        <span class="p-ball extro">25</span>
+                                        <span class="p-ball extro">29</span>
+                                        <span class="p-ball extro">23</span>
+                                        <span class="p-ball extro">22</span>
+                                        <span class="p-ball extro">11</span>
+                                </div>
+                                <h5 class="area-name">Peripheral Area</h5>
+                        </div>
+
+                        <div class="area-box bg-dark">
+                                <div class="ball-container">
+                                        <span class="p-ball intro">15</span>
+                                        <span class="p-ball intro">17</span>
+                                        <span class="p-ball intro">4</span>
+                                        <span class="p-ball intro">20</span>
+                                        <span class="p-ball intro">6</span>
+                                        <span class="p-ball intro">28</span>
+                                        <span class="p-ball extro">30</span>
+                                        <span class="p-ball extro">24</span>
+                                </div>
+                                <h5 class="area-name">Quiet Area</h5>
+                        </div>
+                </div>
+        </section>
+
+        <section class="detailed-stats-section reveal-on-scroll">
+            <table class="distribution-data-table">
+                <thead>
+                    <tr>
+                        <th>Personality<br>Type</th>
+                        <th>Central<br>Area</th>
+                        <th>Active<br>Area</th>
+                        <th>Peripheral<br>Area</th>
+                        <th>Quiet<br>Area</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="type-label">Introverted</td>
+                        <td class="data-cell">1(7%)</td>
+                        <td class="data-cell"><span class="table-highlight-purple">4(22%)</span></td>
+                        <td class="data-cell">2(15%)</td>
+                        <td class="data-cell"><span class="table-highlight-purple">6(46%)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="type-label">Extroverted</td>
+                        <td class="data-cell"><span class="table-highlight-orange">8(42%)</span></td>
+                        <td class="data-cell">3(15%)</td>
+                        <td class="data-cell"><span class="table-highlight-orange">6(32%)</span></td>
+                        <td class="data-cell">2(11%)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="experiment-conclusion-section reveal-on-scroll">
+            <div class="sub-label-left">CONCLUSION</div>
+
+            <div class="final-conclusion-box">
+                <div class="conclusion-group">
+                    <h4 class="conclusion-sub-title bg-highlight-orange">Extroverted Participants</h4>
+                    <p class="preference-flow">
+                        Central Area > Peripheral Area > Active Area > Quiet Area
+                    </p>
+                </div>
+
+                <div class="conclusion-group">
+                    <h4 class="conclusion-sub-title bg-highlight-blue">Introverted Participants</h4>
+                    <p class="preference-flow">
+                        Quiet Area > Active Area > Peripheral Area > Central Area
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="experiment-detail-section reveal-on-scroll">
+            <div class="layered-title-wrapper">
+                <span class="bg-number-index">02</span>
+                <span class="fg-title-text">Choosing Neighbors in the Area</span>
+            </div>
+
+            <div class="sub-label-left">Neighbor Preference Survey</div>
+
+            <div class="large-study-media">
+                <img src="3-30.png" alt="Neighbor Preference Survey Detail">
+            </div>
+            <div class="large-study-media shrink-75 reveal-on-scroll">
+                <img src="3-31.png" alt="Neighbor Selection Logic Diagram">
+            </div>
+        </section>
+        
+
+        <section class="neighbor-conclusion-section reveal-on-scroll">
+            <div class="sub-label-left">CONCLUSION</div>
+
+            <div class="full-width-conclusion-box">
+                <p class="conclusion-intro-text">
+                    When arranging seats within each area, try to meet the preferences first; if that’s not possible, prioritize the central points of each area (for Thinking-type).
+                </p>
+
+                <div class="order-group">
+                    <h4 class="order-sub-title bg-highlight-grey">General order</h4>
+                    <p class="order-flow">Education > Position = Job > Hometown > MBTI</p>
+                </div>
+
+                <div class="order-group">
+                    <h4 class="order-sub-title bg-highlight-orange-light">Thinking order</h4>
+                    <p class="order-flow">Position > Education > Job = Hometown > MBTI</p>
+                </div>
+
+                <div class="order-group">
+                    <h4 class="order-sub-title bg-highlight-blue-light">Feeling order</h4>
+                    <p class="order-flow">Education > Job > MBTI > Position > Hometown</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pre-design-section reveal-on-scroll">
+                <div class="main-title-centered-wrapper">
+                        <h2 class="pre-design-main-title">PRE-DESIGN</h2>
+                </div>
+
+                <div class="sub-label-left">Design Aim</div>
+                <div class="design-aim-box">
+                        <p>
+                                To create a more comfortable and harmonious meeting environment where people feel at ease and compatible with those around them.
+                        </p>
+                </div>
+
+                <div class="sub-label-left">Ideation</div>
+                
+                <div class="ideation-flow-wrapper">
+                        <div class="flow-column">
+                                <div class="flow-phase">
+                                        <h4 class="phase-title">I DATA COLLECTION</h4>
+                                        <div class="flow-node">Participants (MBTI, Education, Position, Hometown...)</div>
+                                        <div class="flow-arrow-down"></div>
+                                        <div class="flow-node">Data Transmission & Organization</div>
+                                </div>
+
+                                <div class="flow-phase">
+                                        <h4 class="phase-title">II DATA PROCESSING</h4>
+                                        <div class="flow-node">MBTI Classification (Extroverted / Introverted Zone)</div>
+                                        <div class="flow-arrow-down"></div>
+                                        <div class="flow-decision">
+                                                <div class="decision-item">Find Same Background? <span class="tag-y">Y</span> / <span class="tag-n">N</span></div>
+                                                <div class="decision-item">Find Same Job/Position? <span class="tag-y">Y</span> / <span class="tag-n">N</span></div>
+                                                <div class="decision-item">Find Same Hometown? <span class="tag-y">Y</span> / <span class="tag-n">N</span></div>
+                                        </div>
+                                        <div class="flow-arrow-down"></div>
+                                        <div class="flow-node highlight-node">Generate Recommended Seating</div>
+                                </div>
+                        </div>
+
+                        <div class="flow-column">
+                                <div class="flow-phase">
+                                        <h4 class="phase-title">III SEATS CHOOSING</h4>
+                                        <div class="flow-node">Display on APP before meeting</div>
+                                        <div class="flow-arrow-down"></div>
+                                        <div class="flow-node">User Pre-selection & Neighbor Info</div>
+                                        <div class="flow-arrow-down"></div>
+                                        <div class="flow-node">Confirm Seating Layout</div>
+                                </div>
+
+                                <div class="flow-phase">
+                                        <h4 class="phase-title">IV SOCIALIZE HELPING</h4>
+                                        <div class="flow-node">User Selects Chat Partner</div>
+                                        <div class="flow-arrow-down"></div>
+                                        <div class="flow-node">Provide Basic Info & Chat Prompts</div>
+                                        <div class="flow-arrow-down"></div>
+                                        <div class="flow-node highlight-node">Send a Message</div>
+                                </div>
+                        </div>
+                </div>
+                <div class="sub-label-left">How to do</div>
+        <div class="how-to-do-content">
+                <p class="intro-text-large">
+                        I designed a <span class="highlight-purple-text">mobile app</span> to collect personal data and recommend suitable seats. At the same time, I created a <span class="highlight-purple-text">meeting space</span> that feels comfortable and socially balanced.
+                </p>
+                <div class="large-study-media shrink-75 reveal-on-scroll">
+                        <img src="3-32.png" alt="System Implementation Diagram">
+                </div>
+        </div>
+
+        <div class="sub-label-left">Scene Design</div>
+        <div class="scene-design-content">
+                <p class="intro-text-small">
+                        Hover to see the scene generation process.
+                </p>
+                <div class="step-animation-container reveal-on-scroll" id="scene-step-trigger">
+                        <img src="3-33.png" alt="Base Scene" class="step-base-img">
+                        
+                        <div class="step-overlay-wrapper">
+                                <img src="3-34.png" class="step-overlay" id="scene-step-1" alt="Scene Step 1">
+                                <img src="3-35.png" class="step-overlay" id="scene-step-2" alt="Scene Step 2">
+                                <img src="3-36.png" class="step-overlay" id="scene-step-3" alt="Scene Step 3">
+                        </div>
+                </div>
+        </div>
+        </section>
+        
+
+        <section class="algorithm-section reveal-on-scroll" id="algo-trigger">
+                <div class="main-title-centered-wrapper">
+                        <h2 class="section-big-header">ALGORITHM IMPLEMENTATION</h2>
+                </div>
+
+                <div class="algorithm-intro-container">
+                        <p class="algorithm-description">
+                                Genetic algorithm optimizes conference seating by assigning attendees to <span class="highlight-purple-text">regions and subgroups</span> based on <span class="highlight-purple-text">MBTI traits</span>, using multi-objective <span class="highlight-purple-text">scoring</span> to balance preferences and diversity.
+                        </p>
+                </div>
+
+                <div class="section-spacer-double"></div>
+
+                <div class="algo-step-container">
+                        <div class="sub-label-left">Step 1: Data Preparation and Preprocessing</div>
+
+                        <div class="data-flow-wrapper">
+                                <div class="data-process-box">
+                                        <div class="box-title">Data Collection & Validation</div>
+                                        <ul class="box-details">
+                                                <li>Gather data from reliable source</li>
+                                                <li>Verify the presence of necessary columns</li>
+                                        </ul>
+                                </div>
+                                <div class="flow-arrow-horizontal"></div>
+                                <div class="data-process-box">
+                                        <div class="box-title">Attribute Labeling & Standardization</div>
+                                        <ul class="box-details">
+                                                <li>Mark key personality attributes</li>
+                                                <li>Standardize data formats</li>
+                                        </ul>
+                                </div>
+                                <div class="flow-arrow-horizontal"></div>
+                                <div class="data-process-box">
+                                        <div class="box-title">Data Structuring</div>
+                                        <ul class="box-details">
+                                                <li>Convert raw data into a standardized dictionary format</li>
+                                        </ul>
+                                </div>
+                        </div>
+
+                        <div class="large-study-media shrink-75">
+                                <img src="3-37.png" alt="Data Structure Detail">
+                        </div>
+                </div>
+
+                <div class="section-spacer-double"></div>
+
+                <div class="algo-step-container">
+                        <div class="sub-label-left">Step 2: Genetic Algorithm</div>
+
+                        <div class="ga-flow-vertical">
+                                <div class="ga-node ga-start">START</div>
+                                <div class="ga-arrow-v"></div>
+
+                                <div class="ga-node ga-light">
+                                        <strong>Initialize Population</strong>
+                                        <span>Generate Random Seat Allocation Scheme</span>
+                                </div>
+                                <div class="ga-arrow-v"></div>
+
+                                <div class="ga-node ga-medium">
+                                        <strong>Evaluate Fitness</strong>
+                                        <span>Calculate Score for Each Scheme</span>
+                                </div>
+                                <div class="ga-arrow-v"></div>
+
+                                <div class="ga-node ga-light">
+                                        <strong>Selection Operation</strong>
+                                        <span>Retain High-Fitness Individuals</span>
+                                </div>
+                                <div class="ga-arrow-v"></div>
+
+                                <div class="ga-node ga-light">
+                                        <strong>Crossover Operation</strong>
+                                        <span>Exchange Gene Segments between individuals</span>
+                                </div>
+                                <div class="ga-arrow-v"></div>
+
+                                <div class="ga-node ga-light">
+                                        <strong>Mutation Operation</strong>
+                                        <span>Randomly Introduce New Variations</span>
+                                </div>
+                                <div class="ga-arrow-v"></div>
+
+                                <div class="ga-decision-wrapper">
+                                        <div class="ga-node ga-medium">
+                                                <strong>Termination Condition Met?</strong>
+                                                <span>(e.g. Reached Maximum Iterations)</span>
+                                        </div>
+                                        <div class="ga-loop-path">
+                                                <span class="logic-label">N</span>
+                                        </div>
+                                        <div class="ga-output-path">
+                                                <div class="ga-node ga-dark">Output</div>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div class="large-study-media">
+                                <img src="3-38.png" alt="Algorithm Results Visualization">
+                        </div>
+                </div>
+        </section>
+
+        <section class="example-section reveal-on-scroll">
+                <div class="sub-label-left">EXAMPLE</div>
+                
+                <div class="example-flex-container">
+                        <div class="example-image-wrapper shrink-60">
+                                <img src="3-39.png" alt="Algorithm Generation Example">
+                        </div>
+
+                        <div class="attribute-grid">
+                                <div class="attr-item">Name</div>
+                                <div class="attr-item">Position</div>
+                                <div class="attr-item">Hometown</div>
+                                
+                                <div class="attr-item">ID</div>
+                                <div class="attr-item">Job</div>
+                                <div class="attr-item">Preference</div>
+                                
+                                <div class="attr-item">MBTI</div>
+                                <div class="attr-item">Education</div>
+                                <div class="attr-item">Gender</div>
+                                
+                                <div class="attr-item">Age</div>
+                                <div class="attr-item">Hobby</div>
+                                <div class="attr-item">......</div>
+                        </div>
+                </div>
+                
+        </section>
+
+        <section class="attribute-labeling-section reveal-on-scroll">
+                <div class="labeling-arrow-wrapper">
+                        <div class="arrow-line-small"></div>
+                        <div class="arrow-head-small"></div>
+                        <p class="labeling-text">Attribute Labeling</p>
+                </div>
+
+                <div class="labeling-table-container">
+                        <div class="v-header-main">Different MBTI</div>
+
+                        <div class="labeling-content-rows">
+                                <div class="type-group">
+                                        <div class="type-sidebar bg-blue-light">E-Type</div>
+                                        <div class="sub-type-rows">
+                                                <div class="sub-row">
+                                                        <div class="sub-label">T-Type</div>
+                                                        <div class="ball-list">
+                                                                <span class="p-ball-small bg-blue-ball">1</span>
+                                                                <span class="p-ball-small bg-blue-ball">2</span>
+                                                        </div>
+                                                </div>
+                                                <div class="sub-row">
+                                                        <div class="sub-label">Anti T-Type</div>
+                                                        <div class="ball-list">
+                                                                <span class="p-ball-small bg-blue-ball">3</span>
+                                                                <span class="p-ball-small bg-blue-ball">4</span>
+                                                                <span class="p-ball-small bg-blue-ball">5</span>
+                                                                <span class="p-ball-small bg-blue-ball">6</span>
+                                                                <span class="p-ball-small bg-blue-ball">7</span>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="type-group">
+                                        <div class="type-sidebar bg-orange-light">I-Type</div>
+                                        <div class="sub-type-rows">
+                                                <div class="sub-row">
+                                                        <div class="sub-label">T-Type</div>
+                                                        <div class="ball-list">
+                                                                <span class="p-ball-small bg-orange-ball">8</span>
+                                                                <span class="p-ball-small bg-orange-ball">9</span>
+                                                        </div>
+                                                </div>
+                                                <div class="sub-row">
+                                                        <div class="sub-label">Anti T-Type</div>
+                                                        <div class="ball-list">
+                                                                <span class="p-ball-small bg-orange-ball">10</span>
+                                                                <span class="p-ball-small bg-orange-ball">11</span>
+                                                                <span class="p-ball-small bg-orange-ball">12</span>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </section>
+
+
+
+        <section class="data-structuring-section reveal-on-scroll">
+                <div class="labeling-arrow-wrapper">
+                        <div class="arrow-line-small"></div>
+                        <div class="arrow-head-small"></div>
+                        <p class="labeling-text">Data Structuring<br><span class="sub-text-small">(Sort according to experimental conclusions)</span></p>
+                </div>
+
+                <div class="structuring-flex-container">
+                        <div class="possibility-block">
+                                <div class="possibility-header">Possibility 1</div>
+                                <div class="columns-wrapper">
+                                        <div class="data-column">
+                                                <div class="col-id">A</div>
+                                                <div class="ball-stack">
+                                                        <span class="p-ball-small bg-orange-ball">8</span>
+                                                        <span class="p-ball-small bg-orange-ball">11</span>
+                                                        <span class="p-ball-small bg-orange-ball">12</span>
+                                                </div>
+                                        </div>
+                                        <div class="data-column">
+                                                <div class="col-id">B</div>
+                                                <div class="ball-stack">
+                                                        <span class="p-ball-small bg-blue-ball">1</span>
+                                                        <span class="p-ball-small bg-blue-ball">3</span>
+                                                        <span class="p-ball-small bg-blue-ball">4</span>
+                                                </div>
+                                        </div>
+                                        <div class="data-column">
+                                                <div class="col-id">C</div>
+                                                <div class="ball-stack">
+                                                        <span class="p-ball-small bg-orange-ball">9</span>
+                                                        <span class="p-ball-small bg-blue-ball">7</span>
+                                                        <span class="p-ball-small bg-orange-ball">10</span>
+                                                </div>
+                                        </div>
+                                        <div class="data-column">
+                                                <div class="col-id">D</div>
+                                                <div class="ball-stack">
+                                                        <span class="p-ball-small bg-blue-ball">2</span>
+                                                        <span class="p-ball-small bg-blue-ball">5</span>
+                                                        <span class="p-ball-small bg-blue-ball">6</span>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div class="possibility-block">
+                                <div class="possibility-header">Possibility 2</div>
+                                <div class="columns-wrapper">
+                                        <div class="data-column">
+                                                <div class="col-id">A</div>
+                                                <div class="ball-stack">
+                                                        <span class="p-ball-small bg-orange-ball">9</span>
+                                                        <span class="p-ball-small bg-blue-ball">7</span>
+                                                        <span class="p-ball-small bg-orange-ball">12</span>
+                                                </div>
+                                        </div>
+                                        <div class="data-column">
+                                                <div class="col-id">B</div>
+                                                <div class="ball-stack">
+                                                        <span class="p-ball-small bg-blue-ball">2</span>
+                                                        <span class="p-ball-small bg-blue-ball">3</span>
+                                                        <span class="p-ball-small bg-blue-ball">5</span>
+                                                </div>
+                                        </div>
+                                        <div class="data-column">
+                                                <div class="col-id">C</div>
+                                                <div class="ball-stack">
+                                                        <span class="p-ball-small bg-orange-ball">8</span>
+                                                        <span class="p-ball-small bg-orange-ball">11</span>
+                                                        <span class="p-ball-small bg-orange-ball">10</span>
+                                                </div>
+                                        </div>
+                                        <div class="data-column">
+                                                <div class="col-id">D</div>
+                                                <div class="ball-stack">
+                                                        <span class="p-ball-small bg-blue-ball">1</span>
+                                                        <span class="p-ball-small bg-blue-ball">4</span>
+                                                        <span class="p-ball-small bg-blue-ball">6</span>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <div class="logic-dots">......</div>
+        </section>
+
+
+        <section class="rating-section reveal-on-scroll">
+                <div class="labeling-arrow-wrapper">
+                        <div class="arrow-line-small"></div>
+                        <div class="arrow-head-small"></div>
+                        <p class="labeling-text">Distribution Rating</p>
+                </div>
+
+                <div class="rating-flex-container">
+                        
+                        <div class="rating-column">
+                                <div class="possibility-header">Possibility 1</div>
+                                
+                                <div class="rating-card">
+                                        <div class="card-row-main">
+                                                <span class="zone-id">Zone A</span>
+                                                <span class="strait-label">Same Straits</span>
+                                        </div>
+                                        <div class="score-detail">
+                                                <div class="score-line">
+                                                        <span class="p-ball-small bg-orange-ball">8</span>
+                                                        <span class="score-attr">MBTI</span>
+                                                        <span class="p-ball-small bg-orange-ball">11</span>
+                                                        <span class="p-ball-small bg-orange-ball">12</span>
+                                                        <span class="points">20 points</span>
+                                                </div>
+                                                <div class="score-line">
+                                                        <span class="score-attr-empty"></span>
+                                                        <span class="score-attr">Job</span>
+                                                        <span class="p-ball-small bg-orange-ball">12</span>
+                                                        <span class="points">10 points</span>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="rating-card">
+                                        <div class="card-row-main">
+                                                <span class="zone-id">Zone B</span>
+                                                <span class="strait-label">Same Straits</span>
+                                        </div>
+                                        <div class="score-detail">
+                                                <div class="score-line">
+                                                        <span class="p-ball-small bg-blue-ball">1</span>
+                                                        <span class="score-attr">Position</span>
+                                                        <span class="p-ball-small bg-blue-ball">4</span>
+                                                        <span class="points">10 points</span>
+                                                </div>
+                                                <div class="score-line">
+                                                        <span class="score-attr-empty"></span>
+                                                        <span class="score-attr">Hometown</span>
+                                                        <span class="p-ball-small bg-blue-ball">4</span>
+                                                        <span class="points">10 points</span>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="logic-dots-small">......</div>
+
+                                <div class="total-footer">
+                                        <span class="total-label">TOTAL</span>
+                                        <span class="total-score">90 points</span>
+                                </div>
+                        </div>
+
+                        <div class="rating-column">
+                                <div class="possibility-header">Possibility 2</div>
+                                
+                                <div class="rating-card">
+                                        <div class="card-row-main">
+                                                <span class="zone-id">Zone A</span>
+                                                <span class="strait-label">Same Straits</span>
+                                        </div>
+                                        <div class="score-detail">
+                                                <div class="score-line">
+                                                        <span class="p-ball-small bg-orange-ball">9</span>
+                                                        <span class="score-attr">MBTI</span>
+                                                        <span class="p-ball-small bg-orange-ball">12</span>
+                                                        <span class="points">10 points</span>
+                                                </div>
+                                                <div class="score-line">
+                                                        <span class="score-attr-empty"></span>
+                                                        <span class="score-attr">Education</span>
+                                                        <span class="p-ball-small bg-blue-ball">7</span>
+                                                        <span class="points">10 points</span>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="rating-card">
+                                        <div class="card-row-main">
+                                                <span class="zone-id">Zone B</span>
+                                                <span class="strait-label">Same Straits</span>
+                                        </div>
+                                        <div class="score-detail">
+                                                <div class="score-line">
+                                                        <span class="p-ball-small bg-blue-ball">2</span>
+                                                        <span class="score-attr">MBTI</span>
+                                                        <span class="p-ball-small bg-blue-ball">3</span>
+                                                        <span class="p-ball-small bg-blue-ball">5</span>
+                                                        <span class="points">20 points</span>
+                                                </div>
+                                                <div class="score-line">
+                                                        <span class="score-attr-empty"></span>
+                                                        <span class="score-attr">Hometown</span>
+                                                        <span class="p-ball-small bg-blue-ball">5</span>
+                                                        <span class="points">10 points</span>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="logic-dots-small">......</div>
+
+                                <div class="total-footer">
+                                        <span class="total-label">TOTAL</span>
+                                        <span class="total-score">110 points</span>
+                                </div>
+                        </div>
+
+                </div>
+        </section>
+
+
+        <div class="section-spacer-double"></div>
+
+        <section class="final-algo-image-section reveal-on-scroll">
+                <div class="large-study-media">
+                        <img src="3-40.png" alt="Final Optimized Seating Layout Result">
+                </div>
+        </section>
+
+        <section class="app-interface-section reveal-on-scroll">
+                <div class="main-title-centered-wrapper">
+                        <h2 class="section-big-header">APP INTERFACE DESIGN</h2>
+                </div>
+
+                <div class="sub-label-left">Flowchart</div>
+
+                <div class="large-study-media">
+                        <img src="3-41.png" alt="APP Interface Logic Flowchart">
+                </div>
+                <div class="sub-label-left">Wireframe</div>
+                <div class="wireframe-content-wrapper reveal-on-scroll">
+                        <div class="large-study-media">
+                                <img src="3-42.png" alt="SeatSense App Wireframe">
+                        </div>
+                </div>
+
+                <div class="sub-label-left">High-Fi</div>
+                <div class="high-fi-content-wrapper reveal-on-scroll">
+                        <div class="large-study-media">
+                                <img src="3-43.png" alt="SeatSense App High-Fidelity Design">
+                        </div>
+                </div>
+        </section>
+
+
+        <section class="spatial-design-section reveal-on-scroll">
+                <div class="main-title-centered-wrapper">
+                        <h2 class="section-big-header">SPATIAL  DESIGN</h2>
+                </div>
+
+                <div class="large-study-media margin-bottom-60">
+                        <img src="3-47.png" alt="Spatial Design Overview">
+                </div>
+
+                <div class="sub-label-left">Design Method</div>
+                <div class="design-method-content">
+                        <p class="intro-text-large">
+                                I have redesigned the structure of the conference table. They can be <span class="highlight-purple-text">disassembled and reassembled</span> like LEGO bricks, allowing for easy <span class="highlight-purple-text">combination</span> to form enclosed conference tables.
+                        </p>
+                </div>
+
+                <div class="sub-label-left">Generative Logic</div>
+                
+                <div class="generative-logic-wrapper">
+                        <div class="logic-step-block">
+                                <h4 class="step-title-small">Step 1: Find Similar Properties</h4>
+                                <div class="large-study-media shrink-70">
+                                        <img src="3-44.png" alt="Generative Logic Step 1">
+                                </div>
+                        </div>
+
+                        <div class="logic-step-block">
+                                <h4 class="step-title-small">Step 2: Shift Tables</h4>
+                                <div class="large-study-media shrink-80">
+                                        <img src="3-45.png" alt="Generative Logic Step 2">
+                                </div>
+                        </div>
+
+                        <div class="logic-step-block">
+                                <h4 class="step-title-small">Step 3: Generate Map</h4>
+                                <div class="large-study-media shrink-60">
+                                        <img src="3-46.png" alt="Generative Logic Step 3">
+                                </div>
+                        </div>
+                </div>
+                <div class="sub-label-left">Generate in Grasshopper</div>
+                <div class="grasshopper-content reveal-on-scroll">
+                        <div class="large-study-media">
+                                <img src="3-48.png" alt="Parametric Generation in Grasshopper">
+                        </div>
+                </div>
+
+                <div class="sub-label-left">Table Design</div>
+                <div class="table-design-content reveal-on-scroll">
+                        <div class="large-study-media">
+                                <img src="3-49.png" alt="Modular Table Technical Detail">
+                        </div>
+                </div>
+        </section>
+
+    </main>
+
+    <script>
+/* =================================================================
+   1. 通用工具函数 (Utility Functions)
+   ================================================================= */
+
+// 1.1 Study 切换逻辑 (选项卡切换)
+function switchStudy(studyNum) {
+    const buttons = document.querySelectorAll('.toggle-btn');
+    const panes = document.querySelectorAll('.study-pane');
+    
+    buttons.forEach((btn, index) => {
+        btn.classList.toggle('active', index + 1 === studyNum);
+    });
+    panes.forEach((pane, index) => {
+        pane.classList.toggle('active', index + 1 === studyNum);
+    });
+}
+
+// 1.2 自动步骤叠加引擎 (Timer-based)
+// 逻辑：鼠标进入后，每 0.4s 自动显示下一张叠加图
+const initStepAutoAnimation = (triggerId, overlayIds) => {
+    const container = document.getElementById(triggerId);
+    if (!container) return;
+
+    const overlays = overlayIds.map(id => document.getElementById(id));
+    let timer = null; 
+
+    container.addEventListener('mouseenter', () => {
+        if (timer) clearInterval(timer);
+        
+        let currentStep = 0;
+        timer = setInterval(() => {
+            if (currentStep < overlays.length) {
+                if (overlays[currentStep]) {
+                    overlays[currentStep].style.opacity = '1';
+                }
+                currentStep++;
+            } else {
+                clearInterval(timer);
+            }
+        }, 400); // 0.4秒间隔
+    });
+
+    container.addEventListener('mouseleave', () => {
+        if (timer) {
+            clearInterval(timer);
+            timer = null;
+        }
+        overlays.forEach(overlay => {
+            if (overlay) overlay.style.opacity = '0';
+        });
+    });
+};
+
+// 1.3 Result 章节综合动画引擎
+const runResultSectionAnimations = (triggerElement) => {
+    // A. 进度条伸展 (数据驱动)
+    const segments = triggerElement.querySelectorAll('.bar-segment');
+    segments.forEach(s => {
+        const target = s.getAttribute('data-target');
+        if (target) s.style.width = target + '%';
+    });
+
+    // B. 数字增长动画
+    const counters = triggerElement.querySelectorAll('.count-up');
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-value') || counter.innerText);
+        let curr = 0;
+        const update = () => {
+            curr += target / 60; // 约 1 秒完成
+            if (curr < target) {
+                counter.innerText = Math.floor(curr);
+                requestAnimationFrame(update);
+            } else { counter.innerText = target; }
+        };
+        update();
+    });
+
+    // C. 显示文本标签
+    triggerElement.querySelectorAll('.bar-text').forEach(t => t.classList.add('show'));
+
+    // D. 星光球随机跳出 (模拟系统落位)
+    const balls = Array.from(triggerElement.querySelectorAll('.p-ball'));
+    const shuffledBalls = balls.sort(() => Math.random() - 0.5);
+    shuffledBalls.forEach((ball, i) => {
+        setTimeout(() => ball.classList.add('is-visible'), i * 80);
+    });
+};
+
+
+/* =================================================================
+   2. 主程序逻辑 (Main Application)
+   ================================================================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 2.1 页面加载与退出动画管理
+    document.body.classList.remove('is-loading');
+
+    const closeBtn = document.getElementById('close-button');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.body.classList.add('is-leaving');
+            setTimeout(() => { window.location.href = 'main.html'; }, 800);
+        });
+    }
+
+    // 2.2 滚动进入显示逻辑 (Intersection Observer)
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => revealObserver.observe(el));
+
+    // 2.3 表格与图片联动 (Study 1 特有逻辑)
+    const interactiveRows = document.querySelectorAll('.interactive-table tr[data-target]');
+    const defaultOverlay = document.getElementById('ov-default');
+
+    interactiveRows.forEach(row => {
+        const targetId = row.getAttribute('data-target');
+        const targetImage = document.getElementById(targetId);
+        if (!targetImage) return;
+
+        row.addEventListener('mouseenter', () => {
+            targetImage.classList.add('is-active');
+            if (defaultOverlay) defaultOverlay.classList.add('hide-default');
+        });
+        row.addEventListener('mouseleave', () => {
+            targetImage.classList.remove('is-active');
+            if (defaultOverlay) defaultOverlay.classList.remove('hide-default');
+        });
+    });
+
+    // 2.4 初始化自动叠加交互
+    // 模块 01: Choosing an Area (3-25 ~ 3-29)
+    initStepAutoAnimation('area-step-trigger', ['step-1', 'step-2', 'step-3', 'step-4']);
+    
+    // 模块 16: Scene Design (3-33 ~ 3-36)
+    initStepAutoAnimation('scene-step-trigger', ['scene-step-1', 'scene-step-2', 'scene-step-3']);
+
+    // 2.5 触发 Result 章节动效 (0.3 阈值触发)
+    const resultTrigger = document.getElementById('result-trigger');
+    if (resultTrigger) {
+        const resultObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                runResultSectionAnimations(resultTrigger);
+                resultObserver.unobserve(resultTrigger);
+            }
+        }, { threshold: 0.3 });
+        resultObserver.observe(resultTrigger);
+    }
+});
+    </script>
+</body>
+</html>

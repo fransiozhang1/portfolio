@@ -1,0 +1,2222 @@
+:root {
+    --primary-text: #000;
+    --secondary-text: #666; 
+    --bg-white: #fff;
+    --bg-grey: #f5f5f5; /* 文本框背景色 */
+    --font-main: 'Inter', sans-serif;
+    --highlight-purple: #CDCEFF; /* 荧光笔色号 */
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--bg-white);
+    color: var(--primary-text);
+    overflow-x: hidden; /* 关键：防止全出血布局产生横向滚动条 */
+    transition: opacity 0.8s ease;
+}
+
+body.is-loading, body.is-leaving { opacity: 0; }
+
+#close-button {
+    position: fixed; 
+    top: 30px; 
+    right: 40px;
+    font-size: 3em; 
+    text-decoration: none; 
+    color: #000;
+    z-index: 1000; 
+    cursor: pointer;
+    line-height: 1;
+}
+
+#vertical-content {
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 60px 50px 100px 50px;
+}
+
+/* --- 01. HERO SECTION--- */
+.hero-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    display: flex; 
+    align-items: stretch;
+    min-height: 100vh;
+    margin-top: -60px;
+    margin-bottom: 120px;
+    background-color: #dadada; /* 按照要求使用较深的灰色 */
+}
+
+.hero-text { 
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10vh 0 8vh 5vw; /* 标题居上，描述居左下 */
+}
+
+.giant-title { 
+    font-family: "Times New Roman", serif; /* 衬线体增加学术与大牌感 */
+    font-size: 15vw; 
+    font-weight: 900; 
+    line-height: 0.82;
+    letter-spacing: -0.06em;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.hero-description { 
+    font-size: 1.1em; /* 标签字号 */
+    color: var(--secondary-text);
+    max-width: 450px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.hero-media { 
+    flex: 1.5; 
+    overflow: hidden;
+}
+
+.hero-media img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+    border-radius: 0 !important; /* 彻底取消圆角 */
+}
+
+/* --- 02. STORY TITLE --- */
+.story-title-section {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.story-title-section h2 {
+    font-size: 3.5em; /* 大章节标题 3.5em */
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+/* --- 03. 8-PANEL COMIC GRID --- */
+.comic-section {
+    margin-bottom: 120px;
+}
+
+.comic-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 40px;
+}
+
+.comic-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-img {
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    background: var(--bg-grey);
+    border: 3px solid #000; /* 漫画边框感 */
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: transform 0.4s ease;
+}
+
+.comic-panel:hover .panel-img {
+    transform: rotate(-1deg) scale(1.03);
+}
+
+.panel-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.panel-caption {
+    font-size: 0.95em;
+    font-weight: 500;
+    line-height: 1.5;
+    color: var(--primary-text);
+}
+
+/* --- 04. DEFINITION SECTION (左右排版文本框) --- */
+.definition-section {
+    max-width: 1000px;
+    margin: 0 auto 60px auto;
+}
+
+.definition-box {
+    background-color: var(--bg-grey);
+    padding: 50px 60px;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 60px;
+    transition: transform 0.3s ease;
+}
+
+.definition-titles {
+    flex: 1;
+    text-align: left;
+}
+
+.def-label {
+    display: block;
+    font-size: 1.1em; /* 标签字号 */
+    font-weight: 700;
+    color: var(--secondary-text);
+    margin-bottom: 5px;
+}
+
+.def-main-title {
+    font-size: 2.8em; /* 文本框内大标题 2.8em */
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.highlight-purple {
+    background: linear-gradient(180deg, rgba(255,255,255,0) 50%, var(--highlight-purple) 50%);
+    padding: 0 5px;
+    display: inline-block;
+}
+
+.definition-text {
+    flex: 1.2;
+}
+
+.definition-text p {
+    font-size: 1.05em;
+    line-height: 1.7;
+    color: var(--primary-text);
+    text-align: left;
+}
+
+/* --- 05. IMAGE INTERACTION (无缝对比) --- */
+.image-compare-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* 消除缝隙 */
+    margin-bottom: 200px;
+    width: 100%;
+}
+
+.compare-item {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    cursor: crosshair;
+}
+
+.base-img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.overlay-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    pointer-events: none;
+}
+
+.compare-item:hover .overlay-img {
+    opacity: 1;
+}
+
+/* --- 06. BACKGROUND RESEARCH & STUDIES --- */
+
+/* 章节大标题：3.5em 居中 */
+.research-title {
+    font-size: 3.5em; 
+    text-align: center;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin: 120px 0 60px 0;
+    text-transform: uppercase;
+    color: var(--primary-text);
+}
+
+/* 顶部研究背景灰色文本框 */
+.research-box {
+    background-color: var(--bg-grey);
+    padding: 40px 60px;
+    border-radius: 20px;
+    max-width: 800px;
+    margin: 0 auto 80px auto;
+    transition: transform 0.3s ease;
+}
+
+.research-box p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    text-align: left;
+    color: var(--primary-text);
+}
+
+/* Study 切换按钮容器 */
+.study-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+/* 胶囊状切换按钮 */
+.toggle-btn {
+    padding: 12px 35px;
+    font-size: 1.1em; /* 标签字号 */
+    font-weight: 700;
+    border: 2px solid #000;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+    background: #000;
+    color: #fff;
+}
+
+.toggle-btn:hover:not(.active) {
+    background: #f0f0f0;
+}
+
+/* 实验内容面板切换逻辑 */
+.study-pane {
+    display: none; /* 默认隐藏 */
+}
+
+.study-pane.active {
+    display: block; /* 激活后显示 */
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- STUDY 1 内部排版细节 --- */
+
+/* 次级标题：2em 居中 */
+.secondary-title {
+    font-size: 2em; 
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* METHOD & FINDINGS 标签：1.1em 居中 */
+.method-label {
+    font-size: 1.1em;
+    font-weight: 700;
+    text-align: center;
+    margin: 40px 0 20px 0;
+    color: var(--secondary-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* 实验方法图片：居中并缩小 */
+.study-media {
+    width: 100%;
+    margin-bottom: 80px;
+    text-align: center;
+}
+
+.study-media img {
+    width: 75%; /* 缩小图片比例 */
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    border-radius: 0 !important;
+}
+
+/* --- FINDINGS 左右并列容器 --- */
+.findings-flex-container {
+    display: flex;
+    align-items: flex-start; /* 保持顶部对齐为基准 */
+    gap: 60px;
+    max-width: 1100px;
+    margin: 0 auto 120px auto;
+}
+
+/* 左侧表格容器：向下移动约两行的高度 */
+.study-table-container {
+    flex: 1.4; 
+    margin-top: 55px; /* 关键修改：向下偏移以对齐右侧图片内容 */
+}
+
+/* 右侧图片容器 (3-13.png) */
+.study-findings-media {
+    flex: 1; 
+    padding-top: 0; /* 移除之前的 padding，让图片作为对齐参照物 */
+}
+
+.study-findings-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0;
+}
+
+/* 表格第一列 MBTI 字母样式保持不变 */
+.analysis-table tbody td:first-child {
+    font-weight: 900;
+    font-size: 1.8em; 
+    color: #000;
+    width: 80px;
+    text-align: center;
+    line-height: 1;
+}
+
+/* --- 数据表格定制样式 --- */
+.analysis-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+}
+
+.analysis-table th {
+    padding: 15px;
+    font-weight: 800;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #000;
+    text-align: left;
+}
+
+.analysis-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    font-size: 0.95em;
+    vertical-align: middle;
+}
+
+/* 重点：放大第一列 MBTI 字母 */
+.analysis-table tbody td:first-child {
+    font-weight: 900;
+    font-size: 1.8em; /* 显著放大首列 */
+    color: #000;
+    width: 80px;
+    text-align: center;
+    line-height: 1;
+}
+
+/* 斑马纹增强可读性 */
+.analysis-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* 紫色高亮效果 */
+.highlight-purple {
+    background: linear-gradient(180deg, rgba(255,255,255,0) 50%, #CDCEFF 50%);
+    padding: 0 4px;
+    display: inline-block;
+}
+
+/* --- 交互式图片叠加效果 CSS --- */
+
+/* 图片容器设置为相对定位，作为绝对定位子元素的基准 */
+.interactive-media {
+    position: relative;
+    /* 确保容器大小由基础图片撑开 */
+}
+
+/* 基础图片 (3-13) */
+.base-layer {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 1; /* 最底层 */
+}
+
+/* 叠加层容器，铺满整个区域 */
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* 在基础层之上 */
+    pointer-events: none; /* 让鼠标事件穿透叠加层，不影响底层交互 */
+}
+
+/* 所有叠加图片的通用样式 */
+.overlay-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0; /* 默认全部隐藏 */
+    transition: opacity 0.3s ease-in-out; /* 添加平滑过渡效果 */
+}
+
+/* 默认显示的叠加层 (3-14) */
+.overlay-img.default-visible {
+    opacity: 1;
+    z-index: 3;
+}
+
+/* --- JS 交互控制的类名 --- */
+
+/* 当鼠标滑过特定行时，激活对应的图片 */
+.overlay-img.is-active {
+    opacity: 1 !important;
+    z-index: 10; /* 确保激活的图片在最上层 */
+}
+
+/* 当有特定交互发生时，隐藏默认的图片 */
+.overlay-img.default-visible.hide-default {
+    opacity: 0 !important;
+}
+
+/* 表格行的交互反馈 */
+.interactive-table tbody tr[data-target] {
+    cursor: pointer; /* 鼠标变成手型，提示可交互 */
+    transition: background-color 0.2s ease;
+}
+/* 鼠标悬停在交互行时加深背景色 */
+.interactive-table tbody tr[data-target]:hover {
+    background-color: #e0e0e0; 
+}
+/* --- Study 结论文字样式 --- */
+
+.study-conclusion-text {
+    font-size: 1.05em; 
+    line-height: 1.8;
+    color: var(--primary-text);
+    text-align: center; /* 保持与标题一致的居中感 */
+    max-width: 800px;  /* 限制宽度以优化阅读体验 */
+    margin: 0 auto 120px auto; /* 底部留白，为后续 Study 2 预留空间 */
+    font-weight: 400;
+}
+
+
+
+
+
+/* --- Study 2 表格定制优化 --- */
+
+/* 1. 横向缩小 40% (即宽度设为 60%) */
+.study-2-table {
+    width: 60% !important; 
+    margin: 0 auto 100px auto; /* 保持居中 */
+}
+
+/* 2. 针对 Study 2 第一列的字体重置 */
+.study-2-table .analysis-table tbody td:first-child {
+    font-size: 1em;       /* 重置为标准字号，不再是 1.8em */
+    font-weight: 700;    /* 仅保持中等加粗，作为行标题 */
+    width: auto;         /* 取消 Study 1 的固定宽度 */
+    text-align: left;    /* 恢复左对齐，符合参考图习惯 */
+    color: var(--secondary-text); /* 稍微调浅，突出右侧数据 */
+}
+
+/* 3. 针对 Study 2 复杂表头的字号微调 */
+.study-2-table .analysis-table th {
+    font-size: 0.8em;    /* 缩小表头字号以适应紧凑布局 */
+    line-height: 1.3;
+    padding: 10px;
+}
+
+.study-2-table .analysis-table td {
+    padding: 12px;
+    font-size: 0.9em;
+}
+
+
+/* --- Study 2 案例与结论优化 --- */
+
+/* 案例描述文字样式 */
+.study-example-text {
+    font-size: 1.05em;
+    color: var(--primary-text);
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+/* 缩小版居中图片容器 (用于 3-20.png) */
+.study-media-small {
+    width: 100%;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.study-media-small img {
+    /* 缩小图片至 50% 或 60%，取决于你的图面感 */
+    width: 65%; 
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    border-radius: 0 !important;
+}
+
+/* 结论段落样式 (复用 Study 1 但确保底部间距) */
+.study-conclusion-text {
+    font-size: 1.05em;
+    line-height: 1.8;
+    color: var(--primary-text);
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto 120px auto; /* 底部大留白增加呼吸感 */
+}
+
+
+/* --- 07. ANIMATIONS (Reveal on Scroll) --- */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 响应式适配 --- */
+@media (max-width: 850px) {
+    .definition-box { flex-direction: column; padding: 40px; gap: 30px; }
+    .hero-section { flex-direction: column; }
+    .hero-text { padding: 60px 5vw; }
+    .giant-title { font-size: 18vw; }
+    .research-title, .story-title-section h2 { font-size: 2.5em; }
+    .comic-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .comic-grid { grid-template-columns: 1fr; }
+}
+
+
+
+
+
+/* --- 强制消除间隙逻辑 --- */
+
+/* 1. 消除第一个 Section 的底部间距 */
+.hypothesis-section {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* 2. 消除文字段落的所有内外边距 */
+.tight-text {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: 1.2; /* 压缩行高进一步减小空间 */
+}
+
+/* 3. 消除第二个 Section 的顶部间距 */
+.experiment-columns-section {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* --- 保持 3-22 缩小 20% 的逻辑 --- */
+.dual-column-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px; 
+    max-width: 1100px;
+    margin: 20px auto 120px auto; /* 这里 20px 是标题与图片的微调间距 */
+}
+
+.experiment-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.column-mini-title {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 10px; /* 标题与图片的间距 */
+}
+
+.image-shrink {
+    width: 86% !important; /* 缩小 20% */
+    margin: 0 auto;
+}
+
+.column-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* --- 09. 32 PARTICIPANTS 样式 --- */
+
+.participants-section {
+    max-width: 1200px;
+    margin: 0 auto 150px auto;
+}
+
+/* 灰色矩形外盒 (无圆角) */
+.participants-container {
+    background-color: #e6e6e6; /* 浅灰色背景 */
+    padding: 30px 40px;
+    border: 1px solid #ccc;
+    border-radius: 0 !important; /* 强制无圆角 */
+    text-align: center;
+}
+
+.participants-main-title {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-bottom: 40px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+}
+
+.profiles-flex-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+/* 单个名片卡片 */
+.participant-card {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.card-image-box {
+    width: 120px;
+    margin-right: 15px;
+    text-align: center;
+}
+
+.card-image-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 8px;
+    filter: grayscale(100%); /* 保持照片统一的黑白质感 */
+}
+
+.respondent-label {
+    font-size: 0.9em;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* 文字信息盒 (无圆角) */
+.card-info-box {
+    flex: 1;
+    padding: 20px;
+    font-size: 0.95em;
+    line-height: 1.6;
+    height: auto;
+    min-height: 140px;
+}
+
+/* 背景色设定 (参考图色号) */
+.bg-blue {
+    background-color: #e5e7ff; /* 浅淡紫色/蓝色 */
+}
+
+.bg-orange {
+    background-color: #fff0e0; /* 浅淡橙色 */
+}
+
+.participants-footer {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-top: 20px;
+    letter-spacing: 0.1em;
+}
+
+/* 响应式处理 */
+@media (max-width: 900px) {
+    .profiles-flex-wrapper {
+        flex-direction: column;
+    }
+}
+
+
+
+/* --- 10. 步骤叠加动画样式 --- */
+
+
+.experiment-detail-section {
+    max-width: 1200px;
+    margin: 0 auto 120px auto;
+    text-align: center;
+}
+
+/* 叠加容器：利用 Flex 居中所有子元素 */
+.layered-title-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 180px;       /* 增加容器高度以容纳大数字 */
+    margin-bottom: 20px;
+}
+
+/* 下层：灰色大数字 */
+.bg-number-index {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 绝对居中算法 */
+    font-size: 10em;      /* 巨大的背景索引 */
+    font-weight: 900;
+    color: #f0f0f0;      /* 极浅灰色 */
+    z-index: 1;          /* 处于底层 */
+    line-height: 1;
+    letter-spacing: -0.05em;
+    user-select: none;   /* 禁止选中，避免干扰 */
+}
+
+/* 上层：黑色前景文字 */
+.fg-title-text {
+    position: relative;
+    z-index: 2;          /* 叠在数字之上 */
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--primary-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* 底部图片动画容器保持原样 */
+
+.experiment-detail-section {
+    max-width: 1200px; /* 保持与大图宽度一致 */
+    margin: 0 auto 120px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 模拟 Study 1 的 METHOD 形式，但改为左对齐 */
+.simulation-title {
+    font-size: 1.1em;
+    font-weight: 700;
+    text-align: left;
+    color: var(--secondary-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    width: 100%;        /* 确保在 flex 容器中占据整行 */
+}
+
+/* 确保 layered-title-wrapper 内部依然水平居中 */
+.layered-title-wrapper {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+    margin-bottom: 10px;
+}
+
+.step-animation-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.step-base-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.step-overlay-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 防止遮罩层干扰鼠标事件 */
+}
+
+.step-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* 默认隐藏 */
+    transition: opacity 0.3s ease; /* 淡淡的淡入效果 */
+    object-fit: contain;
+}
+
+/* 激活状态类名 */
+.step-overlay.is-visible {
+    opacity: 1;
+}
+
+
+
+/* ================================================================
+   11. RESULT SECTION - 比例优化与动画修复版
+   ================================================================ */
+
+/* 章节大容器 */
+.result-section {
+  max-width: 1200px;
+  margin: 0 auto 150px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 1. 标题样式：严格左对齐，复用 Study 1 METHOD 格式 */
+.result-label-header {
+  font-size: 1.1em;
+  font-weight: 700;
+  text-align: left;
+  color: var(--secondary-text);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 30px;
+}
+
+/* 2. 动态进度条 (Bar) */
+.bar-wrapper {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.bar-container {
+  display: flex;
+  width: 100%;
+  height: 55px;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+/* 动画关键：初始 width 必须为 0 */
+.bar-segment {
+  height: 100%;
+  width: 0; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 1.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.intro-bar { background-color: #7b7fff; color: #ffffff; } /* 内向-紫色 */
+.extro-bar { background-color: #ffcc99; color: #000000; } /* 外向-橙色 */
+
+/* 动画关键：初始 opacity 为 0 */
+.bar-text {
+  font-size: 1.4em;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.5s ease 1.2s; /* 进度条滚动完后再显示 */
+}
+
+.bar-text.show {
+  opacity: 1;
+}
+
+.bar-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1.6em;
+  font-weight: 500;
+}
+
+/* 3. 指示箭头样式 (精准中轴对齐) */
+.choose-seats-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 0;
+}
+
+.arrow-text-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 500px; /* 固定宽度确保中轴参考 */
+}
+
+.arrow-text-side {
+  flex: 1; /* 平分空间 */
+  font-family: 'Inter', sans-serif;
+  font-size: 1.6em;
+  font-weight: 300;
+  color: #000;
+}
+
+.arrow-text-side:first-child { text-align: right; }
+.arrow-text-side:last-child { text-align: left; }
+
+.arrow-line {
+  width: 2px;
+  height: 70px;
+  background-color: #000;
+}
+
+.arrow-head {
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 18px solid #000;
+  margin-top: -2px;
+}
+
+/* 4. 空间分布网格 (4矩形) - 缩小至 75% 比例 */
+.area-distribution-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background-color: #ffffff;
+  border: 1px solid #eee;
+  
+  /* 比例调整 */
+  width: 75%;
+  margin: 0 auto;
+}
+
+.area-box {
+  padding: 40px 20px;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 矩形阶梯灰度 */
+.bg-lightest { background-color: #f5f5f5; }
+.bg-light { background-color: #eeeeee; }
+.bg-medium { background-color: #e0e0e0; }
+.bg-dark { background-color: #d0d0d0; }
+
+.area-name {
+  font-size: 1.6em;
+  font-weight: 600;
+  margin-top: 25px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* 5. 星光号码球样式 */
+.ball-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 260px;
+}
+
+/* 动画关键：初始 scale(0.3) 和 opacity 0 */
+.p-ball {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85em;
+  font-weight: 700;
+  opacity: 0;
+  transform: scale(0.3); 
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.p-ball.intro { background-color: #7b7fff; color: #fff; }
+.p-ball.extro { background-color: #ffcc99; color: #000; }
+
+/* 激活状态：由 JavaScript 触发 */
+.p-ball.is-visible {
+  opacity: 0.9;
+  transform: scale(1);
+}
+
+
+/* --- 12. 数据统计表格定制样式 --- */
+
+/* 简单向下箭头 */
+.simple-down-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 60px 0;
+}
+
+.simple-arrow-line { 
+    width: 2px; 
+    height: 60px; 
+    background: #000; 
+}
+
+.simple-arrow-head {
+    width: 0; height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 15px solid #000;
+}
+
+/* 统计表格 */
+.detailed-stats-section {
+    max-width: 1200px;
+    margin: 0 auto 150px auto;
+}
+
+.distribution-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+/* 核心：每列背景色与上方 Area Box 严格对齐 */
+.distribution-data-table th, 
+.distribution-data-table td {
+    padding: 35px 15px;
+    border: none;
+}
+
+/* 列底色逻辑：从左至右由浅入深 */
+.distribution-data-table th:nth-child(1), .distribution-data-table td:nth-child(1) { background-color: #f9f9f9; text-align: left; padding-left: 40px; }
+.distribution-data-table th:nth-child(2), .distribution-data-table td:nth-child(2) { background-color: #f5f5f5; }
+.distribution-data-table th:nth-child(3), .distribution-data-table td:nth-child(3) { background-color: #eeeeee; }
+.distribution-data-table th:nth-child(4), .distribution-data-table td:nth-child(4) { background-color: #e0e0e0; }
+.distribution-data-table th:nth-child(5), .distribution-data-table td:nth-child(5) { background-color: #d0d0d0; }
+
+/* 字体样式定制 */
+.distribution-data-table th {
+    font-size: 1.6em;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #000;
+}
+
+.type-label {
+    font-size: 1.4em;
+    color: #333;
+    font-family: 'Inter', sans-serif;
+}
+
+.data-cell {
+    font-family: "Courier New", Courier, monospace; /* 还原参考图的打字机字体感 */
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+/* 表格内高亮色块 (无圆角) */
+.table-highlight-purple {
+    background-color: #CDCEFF; /* 紫色高亮 */
+    padding: 2px 10px;
+}
+
+.table-highlight-orange {
+    background-color: #ffcc99; /* 橙色高亮 */
+    padding: 2px 10px;
+}
+
+
+
+
+/* --- 13. 实验结论模块样式修正 --- */
+
+.experiment-conclusion-section {
+    max-width: 1200px;
+    margin: 0 auto 150px auto;
+}
+
+/* 确保副标题左对齐且样式统一 */
+.sub-label-left {
+    font-size: 1.1em;
+    font-weight: 700;
+    text-align: left; /* 强制左对齐 */
+    color: var(--secondary-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 25px; /* 统一标题与内容间距 */
+}
+
+/* 结论大文本框 */
+.final-conclusion-box {
+    background-color: #f2f2f2;
+    padding: 35px 45px; /* 略微缩小内边距 */
+    border: 1px solid #d0d0d0;
+    border-radius: 0 !important;
+}
+
+.conclusion-group {
+    margin-bottom: 25px;
+}
+
+.conclusion-group:last-child {
+    margin-bottom: 0;
+}
+
+/* 结论小标题：从 1.8em 缩小到 1.15em */
+.conclusion-sub-title {
+    display: inline-block;
+    font-size: 1.15em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding: 0 4px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* 偏好流向文字：从 1.6em 缩小到 1.05em */
+.preference-flow {
+    font-size: 1.05em;
+    font-weight: 400;
+    color: #000;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.03em;
+}
+
+/* 保持背景色块一致 */
+.bg-highlight-orange { background-color: #ffcc99; }
+.bg-highlight-blue   { background-color: #CDCEFF; }
+
+
+
+
+
+/* --- 14. 实验细节 02：叠加标题与布局 --- */
+
+.experiment-detail-section {
+    max-width: 1200px;
+    margin: 0 auto 120px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 叠加标题容器 */
+.layered-title-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+    margin-bottom: 10px;
+}
+
+/* 下层：灰色大数字 02 */
+.bg-number-index {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10em;
+    font-weight: 900;
+    color: #f0f0f0;
+    z-index: 1;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    user-select: none;
+}
+
+/* 上层：黑色标题文字 */
+.fg-title-text {
+    position: relative;
+    z-index: 2;
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--primary-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+/* 副标题：严格对齐 METHOD 格式 */
+.sub-label-left {
+    font-size: 1.1em;
+    font-weight: 700;
+    text-align: left;
+    color: var(--secondary-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 25px;
+}
+
+/* 大图容器 */
+.large-study-media {
+    width: 100%;
+}
+
+.large-study-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0 !important; /* 保持严谨矩形 */
+}
+
+
+
+
+/* --- 15. 邻座选择结论模块 (全宽版) --- */
+
+.neighbor-conclusion-section {
+    max-width: 1200px;
+    margin: 80px auto 150px auto;
+    width: 100%;
+}
+
+/* 标题样式：继承 METHOD 逻辑 */
+.neighbor-conclusion-section .sub-label-left {
+    font-size: 1.1em;
+    font-weight: 700;
+    text-align: left;
+    color: var(--secondary-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 25px;
+}
+
+/* 文本框：横向占满且保持矩形严谨感 */
+.full-width-conclusion-box {
+    background-color: #f2f2f2;
+    padding: 50px 60px;
+    border: 1px solid #d0d0d0;
+    border-radius: 0 !important;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.conclusion-intro-text {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 35px;
+    font-family: 'Inter', sans-serif;
+}
+
+.order-group {
+    margin-bottom: 25px;
+}
+
+.order-group:last-child {
+    margin-bottom: 0;
+}
+
+/* 优先级标题：带特定色号高亮 */
+.order-sub-title {
+    display: inline-block;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding: 0 5px;
+    font-family: 'Inter', sans-serif;
+}
+
+.bg-highlight-grey { background-color: #d1d1d1; }
+.bg-highlight-orange-light { background-color: #ffcc99; }
+.bg-highlight-blue-light { background-color: #CDCEFF; }
+
+/* 排序路径文字 */
+.order-flow {
+    font-size: 1.1em;
+    font-weight: 400;
+    color: #000;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+/* 将容器宽度锁定为 75% (即缩小 25%) 并居中 */
+.shrink-75 {
+    width: 65% !important;
+    margin: 0 auto; /* 确保缩小的图片在版面中居中 */
+}
+
+/* 确保容器内的图片依然撑满这个 75% 的盒子 */
+.shrink-75 img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* --- 16. PRE-DESIGN & IDEATION 样式 --- */
+
+.design-aim-box {
+        background-color: #f2f2f2;
+        padding: 30px 40px;
+        border: 1px solid #d0d0d0;
+        margin-bottom: 80px;
+}
+
+.design-aim-box p {
+        font-size: 1.15em;
+        line-height: 1.6;
+        color: #333;
+        margin: 0;
+        font-style: italic; /* 赋予设计宣言感 */
+}
+
+/* 流程图容器 */
+.ideation-flow-wrapper {
+        display: flex;
+        gap: 40px;
+        margin-top: 20px;
+}
+
+.flow-column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+}
+
+.flow-phase {
+        border: 1px solid #000;
+        padding: 25px;
+        background: #fff;
+}
+
+.phase-title {
+        font-size: 1.1em;
+        font-weight: 800;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #000;
+        padding-bottom: 5px;
+        display: inline-block;
+}
+
+/* 节点样式 */
+.flow-node {
+        border: 1px solid #ccc;
+        padding: 12px;
+        font-size: 0.9em;
+        text-align: center;
+        background: #fafafa;
+}
+
+.highlight-node {
+        background: #000 !important;
+        color: #fff;
+        font-weight: 700;
+}
+
+/* 判定逻辑样式 */
+.flow-decision {
+        font-size: 0.85em;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px;
+        border-left: 2px solid #000;
+}
+
+.tag-y { font-weight: 800; color: #000; }
+.tag-n { color: #999; }
+
+/* 箭头装饰 */
+.flow-arrow-down {
+        width: 1px;
+        height: 20px;
+        background: #000;
+        margin: 5px auto;
+        position: relative;
+}
+
+.flow-arrow-down::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: -4px;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 6px solid #000;
+}
+
+
+
+
+
+.pre-design-section {
+        max-width: 1200px;
+        margin: 150px auto 100px auto;
+        display: flex;
+        flex-direction: column;
+}
+
+/* 居中大标题 */
+.main-title-centered-wrapper {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 80px; /* 与下方副标题的间距 */
+}
+
+.pre-design-main-title {
+        font-size: 4.5em; /* 足够巨大的冲击力 */
+        font-weight: 900;
+        letter-spacing: 0.15em; /* 增加字间距，显现建筑师的张力 */
+        color: #000;
+        text-transform: uppercase;
+}
+
+
+
+
+/* --- 16.3 & 16.4 细节样式 --- */
+
+.how-to-do-content {
+        margin-bottom: 80px;
+}
+
+.intro-text-large {
+        font-size: 1.25em; /* 略大于正文，作为章节引导语 */
+        line-height: 1.6;
+        color: #333;
+        margin-bottom: 40px;
+        font-family: 'Inter', sans-serif;
+}
+
+/* 紫色高亮样式 */
+.highlight-purple-text {
+        background-color: rgba(205, 206, 255, 0.6); /* 使用你结论中同样的浅紫色 */
+        padding: 0 4px;
+        font-weight: 600;
+        color: #000;
+}
+
+.scene-design-content {
+        width: 100%;
+        margin-bottom: 150px; /* 为下一章节留出呼吸感 */
+}
+
+/* 确保图片自适应宽度 */
+.large-study-media {
+        width: 100%;
+        margin-top: 20px;
+}
+
+.large-study-media img {
+        width: 100%;
+        height: auto;
+        display: block;
+}
+
+
+
+/* --- 新增的小提示文字样式 --- */
+.intro-text-small {
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 10px;
+        font-style: italic;
+}
+
+
+
+
+
+/* --- 17. ALGORITHM IMPLEMENTATION 样式 --- */
+
+.algorithm-section {
+        max-width: 1200px;
+        margin: 150px auto 100px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 确保内部元素居中 */
+}
+
+/* 复用篇章大标题样式 */
+.section-big-header {
+        font-size: 3.5em;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        color: #000;
+        text-transform: uppercase;
+        margin-bottom: 40px;
+        text-align: center;
+}
+
+/* 说明文字容器 */
+.algorithm-intro-container {
+        max-width: 900px; /* 限制宽度以提高长句阅读体验 */
+        text-align: center;
+}
+
+.algorithm-description {
+        font-size: 1.1em;
+        line-height: 1.8;
+        color: #444;
+        font-weight: 300; /* 使用细体 */
+        font-family: 'Inter', sans-serif;
+}
+
+/* 紫色高亮样式 (保持全篇一致) */
+.highlight-purple-text {
+        background-color: rgba(205, 206, 255, 0.7);
+        padding: 0 4px;
+        font-weight: 600;
+        color: #000;
+}
+
+/* --- 17. 算法章节完整样式 --- */
+
+.section-spacer-double {
+        height: 120px; /* 两行空隙 */
+}
+
+/* Step 1: 水平流程图 */
+.data-flow-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 40px 0;
+}
+
+.data-process-box {
+        background-color: #f2f2f2;
+        border: 1px solid #d0d0d0;
+        padding: 20px;
+        flex: 1;
+        min-height: 180px;
+}
+
+.box-title {
+        font-size: 1.1em;
+        font-weight: 700;
+        margin-bottom: 12px;
+        line-height: 1.2;
+}
+
+.box-details {
+        margin: 0;
+        padding-left: 18px;
+        font-size: 0.9em;
+        line-height: 1.4;
+}
+
+/* Step 2: 垂直流程图 */
+.ga-flow-vertical {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 50px 0;
+}
+
+.ga-node {
+        width: 500px;
+        padding: 15px 25px;
+        text-align: center;
+        border: 1px solid #d0d0d0;
+}
+
+.ga-node strong { display: block; font-size: 1.05em; margin-bottom: 4px; }
+.ga-node span { font-size: 0.9em; font-weight: 300; }
+
+.ga-start { background: #666; color: #fff; font-weight: 800; border: none; }
+.ga-dark { background: #333; color: #fff; font-weight: 800; border: none; }
+.ga-medium { background: #e0e0e0; }
+.ga-light { background: #f9f9f9; }
+
+/* 循环线逻辑 */
+.ga-decision-wrapper { position: relative; width: 500px; }
+
+.ga-loop-path {
+        position: absolute;
+        right: -80px;
+        top: 50%;
+        height: 420px; /* 对应回 Evaluate Fitness 的垂直距离 */
+        width: 80px;
+        border: 1px solid #999;
+        border-left: none;
+        transform: translateY(-100%);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 10px;
+}
+
+
+
+/* --- 18. EXAMPLE 样式 --- */
+
+.example-section {
+        max-width: 1200px;
+        margin: 80px auto 120px auto;
+}
+
+.example-flex-container {
+        display: flex;
+        align-items: center; /* 垂直居中 */
+        justify-content: space-between;
+        gap: 50px; /* 图片与网格的间距 */
+        margin-top: 30px;
+}
+
+/* 缩小 60% (即剩余宽度为 40%) */
+.shrink-60 {
+        width: 20% !important;
+        flex-shrink: 0;
+}
+
+.shrink-60 img {
+        width: 100%;
+        height: auto;
+        display: block;
+}
+
+/* 属性网格样式 (基于 image_65c4a2) */
+.attribute-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3列布局 */
+        gap: 10px;
+        flex-grow: 1; /* 占据右侧剩余空间 */
+}
+
+.attr-item {
+        background-color: #e0e0e0; /* 参考图中的浅灰色背景 */
+        padding: 12px 8px;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace; /* 模拟参考图的衬线/打字机风格 */
+        font-size: 1.1em;
+        color: #333;
+        font-weight: 300;
+        letter-spacing: 0.02em;
+}
+
+
+
+
+/* --- 19. ATTRIBUTE LABELING 样式 --- */
+
+.attribute-labeling-section {
+        max-width: 1000px;
+        margin: 0 auto 100px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+}
+
+/* 顶部箭头与小字 */
+.labeling-arrow-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+}
+
+.arrow-line-small {
+        width: 2px;
+        height: 40px;
+        background-color: #000;
+}
+
+.arrow-head-small {
+        width: 0; height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 10px solid #000;
+        margin-top: -2px;
+}
+
+.labeling-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.4em;
+        font-weight: 300;
+        margin-top: 15px;
+        color: #000;
+}
+
+/* 标签化表格主体 */
+.labeling-table-container {
+        display: flex;
+        width: 100%;
+        border-collapse: separate;
+}
+
+/* 左侧垂直标题块 */
+.v-header-main {
+        background-color: #a0a0a0;
+        color: #fff;
+        width: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        writing-mode: vertical-rl; /* 垂直文字 */
+        transform: rotate(180deg);
+        font-size: 1.6em;
+        font-weight: 300;
+        letter-spacing: 0.1em;
+}
+
+.labeling-content-rows {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 5px; /* 行间隙 */
+        margin-left: 5px;
+}
+
+.type-group {
+        display: flex;
+        gap: 5px;
+}
+
+/* E/I 类型侧边栏 */
+.type-sidebar {
+        width: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        font-size: 1.4em;
+        font-weight: 300;
+}
+
+.bg-blue-light { background-color: #d8d9ff; color: #4d51ff; }
+.bg-orange-light { background-color: #ffe8d1; color: #ff9933; }
+
+.sub-type-rows {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+}
+
+.sub-row {
+        display: flex;
+        gap: 5px;
+        height: 70px;
+}
+
+/* T-Type / Anti T-Type 标签 */
+.sub-label {
+        background-color: #c0c0c0;
+        width: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6em;
+        font-weight: 300;
+        font-family: 'Inter', sans-serif;
+}
+
+/* 球体列表容器 */
+.ball-list {
+        background-color: #eeeeee;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        gap: 15px;
+}
+
+/* 号码球样式 */
+.p-ball-small {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1em;
+        font-weight: 700;
+        color: #fff;
+}
+
+.bg-blue-ball { background-color: #9da0ff; }
+.bg-orange-ball { background-color: #ffcc99; }
+
+
+
+
+/* --- 20. DATA STRUCTURING 样式 --- */
+
+.data-structuring-section {
+        max-width: 1100px;
+        margin: 0 auto 150px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+}
+
+/* 副标题微调 */
+.sub-text-small {
+        font-size: 0.7em;
+        font-weight: 300;
+        display: block;
+        margin-top: 5px;
+}
+
+.structuring-flex-container {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        width: 100%;
+        margin-top: 40px;
+}
+
+.possibility-block {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+}
+
+/* 灰色标题条 */
+.possibility-header {
+        background-color: #c0c0c0;
+        padding: 10px 40px;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.8em;
+        font-weight: 300;
+        text-align: center;
+        color: #000;
+}
+
+.columns-wrapper {
+        display: flex;
+        gap: 10px;
+}
+
+/* 单个数据列 */
+.data-column {
+        background-color: #e0e0e0;
+        padding: 15px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        width: 80px;
+}
+
+.col-id {
+        font-size: 1.8em;
+        font-weight: 300;
+        font-family: 'Inter', sans-serif;
+        margin-bottom: 10px;
+}
+
+/* 垂直堆叠的球体 */
+.ball-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+}
+
+/* 底部省略号样式 */
+.logic-dots {
+        margin-top: 40px;
+        font-size: 2em;
+        color: #999;
+        letter-spacing: 0.2em;
+}
+
+/* 复用球体颜色：橙色为内向，蓝色为外向 */
+.bg-orange-ball { background-color: #ffcc99; color: #fff; }
+.bg-blue-ball { background-color: #9da0ff; color: #fff; }
+
+
+.labeling-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.4em;
+        font-weight: 300;
+        margin-top: 15px;
+        color: #000;
+        
+        /* 核心修改：确保多行文字在容器内居中 */
+        text-align: center; 
+}
+
+
+
+
+/* --- 21. DISTRIBUTION RATING 样式 --- */
+
+.rating-section {
+        max-width: 1100px;
+        margin: 0 ;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+}
+
+.rating-flex-container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        width: 100%;
+        margin-top: 40px;
+}
+
+.rating-column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+}
+
+/* 评分卡片基础样式 */
+.rating-card {
+        background-color: #e0e0e0;
+        padding: 15px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+}
+
+.card-row-main {
+        display: flex;
+        align-items: baseline;
+        gap: 15px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 8px;
+}
+
+.zone-id {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.8em;
+        font-weight: 700;
+        color: #000;
+}
+
+.strait-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.1em;
+        font-weight: 300;
+        color: #666;
+}
+
+/* 评分行明细 */
+.score-detail {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+}
+
+.score-line {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 45px;
+}
+
+.score-attr {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.1em;
+        color: #333;
+        min-width: 80px;
+}
+
+.score-attr-empty {
+        width: 40px; /* 留出第一列球的空位 */
+}
+
+.points {
+        margin-left: auto; /* 分数右对齐 */
+        font-family: 'Inter', sans-serif;
+        font-size: 1.1em;
+        font-weight: 300;
+}
+
+/* 底部总计栏 */
+.total-footer {
+        background-color: #333;
+        color: #fff;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+}
+
+.total-label {
+        font-size: 2em;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+}
+
+.total-score {
+        font-size: 1.2em;
+        font-weight: 300;
+}
+
+.logic-dots-small {
+        text-align: center;
+        font-size: 1.5em;
+        color: #999;
+        margin: 5px 0;
+}
+
+
+
+
+/* --- 22. 算法结果大图样式 --- */
+
+/* --- 22. 算法结果大图样式 (缩小 10% 并居中) --- */
+
+.final-algo-image-section {
+    max-width: 1200px;
+    margin: 0 auto 150px auto;
+    width: 100%;
+}
+
+/* 核心修改：将容器宽度锁定为 90%，并利用 margin 实现居中 */
+.final-algo-image-section .large-study-media {
+    width: 80% !important;
+    margin: 0 auto;
+}
+
+.final-algo-image-section .large-study-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* 保持细腻的阴影效果 */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+
+/* --- 23. APP 界面设计章节样式 --- */
+
+.app-interface-section {
+        max-width: 1200px;
+        margin: 150px auto 100px auto;
+        display: flex;
+        flex-direction: column;
+}
+
+/* 确保副标题与上方大标题以及下方图片之间有合理的呼吸感 */
+.app-interface-section .sub-label-left {
+        margin-top: 20px;
+        margin-bottom: 30px;
+}
+
+.app-interface-section .large-study-media {
+        width: 100%;
+}
+
+.app-interface-section .large-study-media img {
+        width: 100%;
+        height: auto;
+        display: block;
+}
+
+
+/* --- 23.2 & 23.3 界面细节样式 --- */
+
+.wireframe-content-wrapper, 
+.high-fi-content-wrapper {
+        width: 100%;
+        margin-top: 30px;
+        margin-bottom: 80px; 
+}
+
+.app-interface-section .sub-label-left {
+        margin-top: 40px; 
+}
+
+
+/* --- 24. SPATIAL DESIGN 居中修正样式 --- */
+
+.spatial-design-section {
+        max-width: 1200px;
+        margin: 150px auto 100px auto;
+}
+
+.generative-logic-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 80px; /* 增加步进之间的间距，让排版更透气 */
+        margin-top: 40px;
+}
+
+.logic-step-block {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* 核心修改：将标题和图片容器全部居中 */
+        align-items: center; 
+        text-align: center;
+}
+
+.step-title-small {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.2em;
+        font-weight: 600;
+        margin-bottom: 25px;
+        color: #333;
+}
+
+/* 精准图片缩放与自动居中 */
+.shrink-70 { width: 70% !important; margin: 0 auto; }
+.shrink-80 { width: 60% !important; margin: 0 auto; }
+.shrink-60 { width: 60% !important; margin: 0 auto; }
+
+.large-study-media img {
+        width: 100%;
+        height: auto;
+        display: block;
+        /* 添加轻微投影增加空间感 */
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+
+/* --- 24.3 & 24.4 空间细节样式 --- */
+
+.grasshopper-content, 
+.table-design-content {
+        width: 100%;
+        margin-top: 30px;
+        margin-bottom: 80px; /* 章节间的呼吸感 */
+}
+
+/* 确保图片自适应且居中 */
+.large-study-media {
+        width: 100%;
+        margin: 0 auto;
+}
+
+.large-study-media img {
+        width: 100%;
+        height: auto;
+        display: block;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+/* 复用 sub-label-left 样式 */
+.app-interface-section .sub-label-left,
+.spatial-design-section .sub-label-left {
+        margin-top: 40px;
+}
